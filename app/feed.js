@@ -35,30 +35,37 @@
   }
 
   /* ---------- tela ---------- */
+  // visual novo (v2.14), igual ao esboço: ícones de linha, foto inteira, curtidas e texto embaixo
+  const SV = p => '<svg viewBox="0 0 24 24" class="f2i" aria-hidden="true">' + p + '</svg>';
+  const FI = {
+    heart: SV('<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'),
+    chat: SV('<path d="M4 5h16v11H9l-5 4z"/>'), dots: SV('<circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/>'),
+    img: SV('<rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="9" cy="9.5" r="1.8"/><path d="m4 17 5-4.5 4 3.5 3-2.5 4 3.5"/>'), plus: SV('<path d="M12 5v14M5 12h14"/>')
+  };
   function post(p) {
     const a = who(p), liked = F.liked.has(p.id), r = p.img_w && p.img_h ? (p.img_w / p.img_h).toFixed(3) : "1";
-    return '<article class="fd-post" data-post="' + p.id + '"><header>' + window.netAvatar(a, "") +
-      '<div class="fd-who"><b>' + esc(a.name) + (p.user_id === me() ? ' <i>você</i>' : "") + '</b><span>Rank ' + esc(a.rank) + ' · Nv ' + a.level + ' · ' + ago(p.created_at) + ' · ' + (p.vis === "groups" ? "👥 grupos" : "🌎 todos") + '</span></div>' +
-      '<button class="fd-more" data-fdmenu="' + p.id + '" aria-label="Opções">⋯</button></header>' +
-      (p.body ? '<p class="fd-body">' + esc(p.body) + '</p>' : "") +
+    return '<article class="fd-post f2-post" data-post="' + p.id + '"><header>' + window.netAvatar(a, "") +
+      '<div class="fd-who"><b>' + esc(p.user_id === me() ? "Você" : a.name) + '</b><span>' + ago(p.created_at) + ' · Rank ' + esc(a.rank) + (p.vis === "groups" ? " · só grupos" : "") + '</span></div>' +
+      '<button class="fd-more" data-fdmenu="' + p.id + '" aria-label="Opções">' + FI.dots + '</button></header>' +
       (p.img_path ? '<div class="fd-img" data-fdimg="' + p.id + '" style="aspect-ratio:' + r + '"><img loading="lazy" alt="" src="' + esc(Net.pubUrl(p.img_path)) + '"><i class="fd-heart">❤️</i></div>' : "") +
-      '<footer><button class="fd-act' + (liked ? " on" : "") + '" data-fdlike="' + p.id + '"><span>' + (liked ? "❤️" : "🤍") + '</span><b>' + (p.likes || 0) + '</b></button>' +
-      '<button class="fd-act" data-fdcom="' + p.id + '"><span>💬</span><b>' + (p.comments || 0) + '</b></button></footer></article>';
+      '<footer><button class="fd-act' + (liked ? " on" : "") + '" data-fdlike="' + p.id + '">' + FI.heart + '<b>' + (p.likes || 0) + '</b></button>' +
+      '<button class="fd-act" data-fdcom="' + p.id + '">' + FI.chat + '<b>' + (p.comments || 0) + '</b></button></footer>' +
+      (p.body ? '<p class="fd-body">' + esc(p.body) + '</p>' : "") + '</article>';
   }
   function vFeed() {
-    const head = '<div class="row between"><div><div class="greet">Comunidade</div><h1>Feed</h1></div><button class="roundbtn" data-fdreload aria-label="Atualizar">↻</button></div>';
+    const other = F.scope === "all" ? "groups" : "all";
+    const head = '<div class="row between"><h1>Feed</h1><div class="row" style="gap:6px"><button class="f2-pill" data-fdscope="' + other + '">' + (F.scope === "all" ? "Todos" : "Meus grupos") + '</button></div></div>';
     if (!Net.on()) return '<div class="stack">' + head + '<div class="card"><p class="note">O servidor ainda não foi configurado.</p></div></div>';
     if (!Net.user()) return '<div class="stack">' + head + '<div class="rk-hero"><div class="rk-trophy">📸</div><h2>Mostre seu treino</h2><p>Poste fotos e conquistas, curta e comente o treino da galera.</p><button class="btn primary block" data-login>Entrar ou criar conta</button></div></div>';
-    if (!F.loaded) { load(); }
+    if (!F.loaded || (!F.busy && F.at && Date.now() - F.at > 90000)) { load(); }
     const a = window.netAcct ? netAcct() : {};
-    return '<div class="stack fd">' + head +
-      '<button class="fd-new" data-fdnew>' + window.netAvatar({ photo: a.photo, avatar: a.avatar, rank: (window.sysStats ? sysStats().rank : "E") }, "") + '<span>No que você está treinando hoje?</span><i>📸</i></button>' +
-      '<div class="segs" role="group"><button data-fdscope="all" aria-pressed="' + (F.scope === "all") + '">🌎 Todos</button><button data-fdscope="groups" aria-pressed="' + (F.scope === "groups") + '">👥 Meus grupos</button></div>' +
+    return '<div class="stack fd f2">' + head +
+      '<button class="fd-new f2-new" data-fdnew>' + window.netAvatar({ photo: a.photo, avatar: a.avatar, rank: (window.sysStats ? sysStats().rank : "E") }, "") + '<span>Como foi o treino hoje?</span>' + FI.img + '</button>' +
       (F.err ? '<div class="card"><p class="note">' + esc(F.err) + '</p></div>' : "") +
       (!F.loaded ? '<div class="card rk-skel" style="height:320px"></div>' : F.posts.length ? F.posts.map(post).join("") +
-        (F.end ? '<p class="note" style="text-align:center">Isso é tudo por enquanto 💪</p>' : '<button class="btn ghost block" data-fdmorebtn>' + (F.busy ? "Carregando…" : "Carregar mais") + '</button>')
+        (F.end ? '<p class="note" style="text-align:center">Isso é tudo por enquanto</p>' : '<button class="btn ghost block" data-fdmorebtn>' + (F.busy ? "Carregando…" : "Carregar mais") + '</button>')
         : '<div class="fd-empty"><span>📸</span><b>Nenhum post ainda</b><p>Seja o primeiro a mostrar o treino de hoje!</p></div>') +
-      '<button class="fd-fab" data-fdnew aria-label="Novo post"><span>＋</span>Novo post</button></div>';
+      '<button class="fd-fab f2-fab" data-fdnew aria-label="Novo post">' + FI.plus + '</button></div>';
   }
   (window.EXTRA_VIEWS = window.EXTRA_VIEWS || {}).feed = vFeed;
 

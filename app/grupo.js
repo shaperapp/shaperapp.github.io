@@ -128,21 +128,50 @@
       : '<div class="card rk-next"><span>⏳</span><div><b>Próximo desafio surpresa</b><span class="note">Chega sem aviso entre ' + hh(g.win_start) + ' e ' + hh(g.win_end) + '. Fique de olho!</span></div></div>';
     const proofs = ac && G.proofs.length ? '<div class="sec"><div class="sechead"><h3>Provas do desafio</h3><span>' + G.proofs.length + '</span></div><p class="note">🔒 Por segurança e privacidade, cada prova é apagada do servidor em 10 minutos. A foto ou o vídeo original fica só no celular de quem enviou.</p><div class="pf-grid">' + G.proofs.map(proofHTML).join("") + '</div></div>' : "";
 
-    return '<div class="stack">' + head + err +
-      (G.groups.length > 1 ? '<div class="qchips">' + G.groups.map(x => '<button class="qchip" data-gsel="' + x.id + '" aria-pressed="' + (x.id === g.id) + '">' + esc(x.name) + '</button>').join("") + '</div>' : "") +
-      '<div class="gc-ticket"><div class="gc-ttop"><div class="gc-badge">👥</div><div class="gc-tname"><b>' + esc(g.name) + '</b><span>' + G.board.length + '/25 membros · desafios ' + hh(g.win_start) + '–' + hh(g.win_end) + '</span></div>' +
-        '<div class="gc-stack">' + G.board.slice(0, 4).map(p => avatar(p, "sm")).join("") + (G.board.length > 4 ? '<span class="rk-av sm gc-more">+' + (G.board.length - 4) + '</span>' : "") + '</div></div>' +
-        '<div class="gc-cut"></div><div class="gc-tcode"><span class="gc-lbl">Código do convite</span>' + cells(g.code, true) +
-        '<div class="gc-tacts"><button data-gcopy="' + esc(g.code) + '">Copiar</button><button data-gqr="' + esc(g.code) + '">▦ QR code</button><button class="solid" data-gshare="' + esc(g.code) + '">Convidar</button></div></div></div>' +
-      (window.chatCard ? chatCard(g) : "") +
-      chal +
-      '<div class="segs" role="group"><button data-gmode="week" aria-pressed="' + (G.mode === "week") + '">Esta semana</button><button data-gmode="all" aria-pressed="' + (G.mode === "all") + '">Geral</button></div>' +
-      leader + '<div class="podium">' + pod + '</div><div class="card rk-list">' + rows + '</div>' + highlights() + proofs +
-      (owner ? '<details class="fold card"><summary>Horário dos desafios</summary><div class="gc-form" style="margin-top:12px">' + winPick("e", G.w.e && G.w.eid === g.id ? G.w.e : [g.win_start, g.win_end]) +
-        '<button class="gc-go" data-gwin>Salvar horário</button></div></details>' : "") +
-      '<details class="fold card"><summary>Outro grupo</summary><div style="margin-top:12px">' + forms().replace('class="card gc-card"', 'class="gc-card"') + '</div></details>' +
-      '<button class="btn ghost danger block" data-gleave>' + (owner ? "Excluir este grupo" : "Sair do grupo") + '</button></div>';
+    return v2(g, owner, ac, list, val, mv, err, proofs);
   }
+
+  /* ---------- visual novo (v2.14): igual ao esboço ---------- */
+  const SVG = p => '<svg viewBox="0 0 24 24" class="g2i" aria-hidden="true">' + p + '</svg>';
+  const GI = {
+    users: SVG('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5a6 6 0 0 1 3.5 5.5"/>'),
+    chat: SVG('<path d="M4 5h16v11H9l-5 4z"/>'), plus: SVG('<path d="M12 5v14M5 12h14"/>'),
+    gear: SVG('<circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/>'),
+    bolt: SVG('<path d="M13 3 5 14h6l-1 7 8-11h-6z"/>'), img: SVG('<rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="9" cy="9.5" r="1.8"/><path d="m4 17 5-4.5 4 3.5 3-2.5 4 3.5"/>'),
+    clock: SVG('<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/>')
+  };
+  G.set = false;
+  function v2(g, owner, ac, list, val, mv, err, proofs) {
+    const n = G.board.length;
+    const head = '<div class="row between"><h1>Grupo</h1><span class="g2-pill">' + G.groups.length + ' grupo' + (G.groups.length > 1 ? "s" : "") + '</span></div>';
+    const sel = G.groups.length > 1 ? '<div class="g2-seg" style="grid-template-columns:repeat(' + Math.min(G.groups.length, 4) + ',1fr)">' + G.groups.map(x => '<button data-gsel="' + x.id + '" class="' + (x.id === g.id ? "on" : "") + '">' + esc(x.name) + '</button>').join("") + '</div>' : "";
+    const card = '<div class="g2-card"><div class="g2-top"><span class="g2-ib">' + GI.users + '</span><div class="g2-tt"><b>' + esc(g.name) + '</b><small>' + n + ' pessoa' + (n === 1 ? "" : "s") + ' · código ' + esc(g.code) + '</small></div><button class="g2-qr" data-gqr="' + esc(g.code) + '">QR</button></div>' +
+      '<div class="g2-acts"><button data-chopen>' + GI.chat + 'Chat</button><button data-gshare="' + esc(g.code) + '">' + GI.plus + 'Convidar</button><button data-gset>' + GI.gear + 'Ajustes</button></div></div>';
+    const chal = ac
+      ? '<div class="g2-chal on" data-end="' + Date.parse(ac.ends_at) + '"><span class="g2-ib">' + GI.bolt + '</span><div class="g2-tt"><b>' + esc(ac.title) + '</b><small>' + esc(ac.descr) + ' · ' + G.done.length + '/' + n + ' fizeram</small></div><b class="g2-cd" data-cd="' + Date.parse(ac.ends_at) + '">--:--</b></div>' +
+        (didChal(ac.id) ? '<div class="g2-ok">✓ Você já fez · +' + ac.xp * 2 + ' XP</div>' : '<button class="g2-go" data-gch="' + ac.id + '">' + GI.bolt + 'Fazer agora · +' + ac.xp * 2 + ' XP</button>')
+      : '<div class="g2-chal"><span class="g2-ib">' + GI.bolt + '</span><div class="g2-tt"><b>Desafio surpresa hoje</b><small>Entre ' + hh(g.win_start) + ' e ' + hh(g.win_end) + ' · XP em dobro</small></div><b class="g2-cd">' + GI.clock + '</b></div>';
+    const rows = list.map((p, i) => '<button class="g2-row' + (p.user_id === me() ? " me" : "") + '" data-gmember="' + p.user_id + '"><b class="g2-pos">' + (i + 1) + '</b>' + avatar(p, "sm") +
+      '<span class="g2-who"><b>' + esc(p.user_id === me() ? "Você" : p.name) + '</b><small>' + p.workouts + ' treino' + (p.workouts === 1 ? "" : "s") + ' · Rank ' + esc(p.rank) + '</small></span><b class="g2-xp">' + val(p) + ' XP' + mv(p.user_id) + '</b></button>').join("");
+    const board = '<div class="g2-box"><div class="row between"><b class="g2-h">' + (G.mode === "week" ? "Semana do grupo" : "Ranking geral") + '</b><button class="g2-link" data-gmode="' + (G.mode === "week" ? "all" : "week") + '">' + (G.mode === "week" ? "termina domingo · ver geral" : "ver semana") + '</button></div>' +
+      '<div class="g2-list">' + (rows || '<p class="note">Ninguém treinou ainda.</p>') + '</div></div>';
+    const cp = window.chatPrev ? chatPrev(g) : null;
+    const chat = '<button class="g2-box g2-chat" data-chopen><div class="row between"><b class="g2-h">Chat</b><span class="muted" style="font-size:.82rem">' + (cp && cp.unread ? cp.unread + " nova" + (cp.unread > 1 ? "s" : "") + " · " : "") + 'some em 24 h</span></div>' +
+      (cp && cp.text ? '<div class="g2-msg' + (cp.mine ? " mine" : "") + '">' + (cp.mine ? "" : '<small>' + esc(cp.who) + '</small>') + '<span>' + (cp.photo ? "📷 " : "") + esc(cp.text) + '</span></div>' : '<p class="note" style="margin:8px 0 0">Mande a primeira mensagem para o grupo.</p>') +
+      '<div class="g2-in"><span>Mensagem…</span>' + GI.img + '</div></button>';
+    const set = '<div class="g2-box g2-set" id="gSet"' + (G.set ? "" : " hidden") + '><b class="g2-h">Ajustes do grupo</b>' +
+      '<div class="g2-acts" style="margin-top:10px"><button data-gcopy="' + esc(g.code) + '">Copiar código</button><button data-gqr="' + esc(g.code) + '">QR code</button></div>' +
+      (owner ? '<span class="gc-lbl" style="margin-top:12px;display:block">Horário dos desafios</span><div class="gc-form">' + winPick("e", G.w.e && G.w.eid === g.id ? G.w.e : [g.win_start, g.win_end]) + '<button class="gc-go" data-gwin>Salvar horário</button></div>' : "") +
+      '<button class="btn ghost danger block" style="margin-top:12px" data-gleave>' + (owner ? "Excluir este grupo" : "Sair do grupo") + '</button></div>';
+    const other = '<div class="g2-two"><button data-gnew="create">' + GI.plus + 'Criar grupo</button><button data-gnew="join">Tenho um código</button></div>' +
+      (G.other ? '<div class="g2-box">' + forms().replace('class="card gc-card"', 'class="gc-card"') + '</div>' : "");
+    return '<div class="stack g2">' + head + err + sel + card + set + chal + board + chat + highlights() + proofs + other + '</div>';
+  }
+  document.addEventListener("click", e => {
+    if (e.target.closest("[data-gset]")) { G.set = !G.set; const s = $("#gSet"); if (s) { s.hidden = !G.set; if (G.set) s.scrollIntoView({ behavior: "smooth", block: "nearest" }); } return; }
+    const nw = e.target.closest("[data-gnew]");
+    if (nw) { G.other = true; G.form = nw.dataset.gnew; render(); setTimeout(() => { const f = document.querySelector(".g2 .gc-card"); if (f) f.scrollIntoView({ behavior: "smooth", block: "center" }); }, 80); }
+  });
   (window.EXTRA_VIEWS = window.EXTRA_VIEWS || {}).grupo = vRank; // aba Grupo (o Ranking geral fica em ranking.js)
 
   /* ---------- perfil de um amigo ---------- */

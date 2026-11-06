@@ -82,6 +82,11 @@
       C.prev[g.id] = { last: r[0] || null, unread: r.filter(m => m.id > seen && m.user_id !== me).length };
     } catch (e) { /* sem chat ainda: só não mostra a prévia */ }
   };
+  // prévia para o cartão de chat da aba Grupo (última mensagem, autor e não lidas)
+  window.chatPrev = g => {
+    const p = C.prev[g.id] || {}, m = p.last;
+    return { unread: p.unread || 0, mine: !!(m && m.user_id === ctx().me), who: m ? (m.user_id === ctx().me ? "Você" : who(m.user_id).name) : "", text: m ? (m.body || "Foto") : "", photo: !!(m && m.has_img) };
+  };
   window.chatCard = g => {
     const p = C.prev[g.id] || {}, m = p.last;
     const txt = m ? (m.body ? esc(m.body) : "📷 Foto") : "";
