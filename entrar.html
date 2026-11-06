@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Entrar no grupo · Shaper</title>
+<title>Entrar no grupo · Ritmiq</title>
 <meta name="robots" content="noindex">
 <style>
   :root{--bg:#070D1C;--fg:#fff;--muted:#AFC0EC}
@@ -19,12 +19,12 @@
 </head>
 <body>
 <main>
-  <div class="logo">S</div>
+  <div class="logo"><svg viewBox="96 60 360 360" style="width:64%;height:64%;display:block" aria-hidden="true"><path d="M136 388V234c0-46 30-74 76-74h16l36-68 44 240 30-104h34" fill="none" stroke="#fff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/><circle cx="402" cy="228" r="27" fill="#FFB547"/></svg></div>
   <h1>Convite para o grupo</h1>
-  <p>Você foi chamado para competir no ranking do Shaper.</p>
+  <p>Você foi chamado para competir no ranking do Ritmiq.</p>
   <div class="code" id="code"></div>
-  <a class="btn" id="open" href="#">Abrir no Shaper</a>
-  <small>No iPhone, o link abre a versão web do Shaper. Não abriu? Abra o app, vá em Ranking → “Tenho um código” e digite o código acima.</small>
+  <a class="btn" id="open" href="#">Abrir no Ritmiq</a>
+  <small>No iPhone, o link abre a versão web do Ritmiq. Não abriu? Abra o app, vá em Ranking → “Tenho um código” e digite o código acima.</small>
 </main>
 <script>
   // só aceita código de 6 letras/números; abre o app pelo link com.shaper.app://join
@@ -34,7 +34,7 @@
   var app = "com.shaper.app://join?c=" + c;
   var intent = "intent://join?c=" + c + "#Intent;scheme=com.shaper.app;package=com.shaper.app;end";
   var btn = document.getElementById("open");
-  // Android abre o app instalado; iPhone e computador abrem a versão web do Shaper
+  // Android abre o app instalado; iPhone e computador abrem a versão web do Ritmiq
   btn.href = /Android/i.test(navigator.userAgent) ? intent : "app/?c=" + c;
   if (c.length === 6) setTimeout(function () { location.href = btn.href; }, 400);
 </script>
