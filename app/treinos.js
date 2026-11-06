@@ -27,8 +27,23 @@
     bunda: { n: "Bumbum", f: "Glúteos firmes e empinados", items: [["Butt_Lift_Bridge", 40, 18], ["Sumo_Squat", 35, 15], ["Donkey_Kick", 40, 16], ["Fire_Hydrant", 40, 16], ["Lunge", 40, 14], ["Wall_Sit", 40]] },
     peito: { n: "Peito", f: "Peito e tríceps sem equipamento", items: [["Incline_Pushup", 30, 12], ["Pushups", 30, 12], ["Wide_Pushup", 30, 10], ["Diamond_Pushup", 30, 8], ["Tricep_Dip", 30, 12], ["Plank", 40]] },
     perna: { n: "Pernas", f: "Coxas, glúteos e panturrilhas", items: [["Bodyweight_Squat", 40, 20], ["Lunge", 40, 14], ["Sumo_Squat", 35, 15], ["Wall_Sit", 45], ["Calf_Raise", 35, 20], ["Freehand_Jump_Squat", 30, 12]] },
-    geral: { n: "Corpo todo", f: "Treino geral para queimar e fortalecer", items: [["Burpee", 30, 8], ["Pushups", 30, 12], ["Bodyweight_Squat", 35, 18], ["Mountain_Climbers", 30], ["High_Knees", 30], ["Lunge", 35, 12], ["Plank", 40]] }
+    geral: { n: "Corpo todo", f: "Treino geral para queimar e fortalecer", items: [["Burpee", 30, 8], ["Pushups", 30, 12], ["Bodyweight_Squat", 35, 18], ["Mountain_Climbers", 30], ["High_Knees", 30], ["Lunge", 35, 12], ["Plank", 40]] },
+    costas: { n: "Costas e postura", f: "Costas fortes e postura reta, sem equipamento", items: [["Superman", 30, 12], ["Reverse_Snow_Angel", 30, 10], ["Prone_YTW", 30, 8], ["Bird_Dog", 30, 12], ["Prone_Swimmer", 30], ["Inverted_Row", 30, 8], ["Plank", 40]] },
+    bracos: { n: "Braços e ombros", f: "Tríceps, bíceps e ombros com o peso do corpo", items: [["Pike_Pushup", 30, 8], ["Diamond_Pushup", 30, 8], ["Tricep_Dip", 30, 12], ["Arm_Circles", 30], ["Plank_Shoulder_Tap", 30, 16], ["Wide_Pushup", 30, 10], ["Plank_Up_Down", 30, 10]] },
+    hiit: { n: "Cardio HIIT", f: "Queima rápida de calorias em pouco tempo", items: [["Jumping_Jack", 30], ["Burpee", 30, 8], ["Mountain_Climbers", 30], ["High_Knees", 30], ["Skater_Jump", 30, 16], ["Squat_Thrust", 30, 10], ["Fast_Feet", 30]] },
+    mobilidade: { n: "Mobilidade", f: "Alongar, soltar e recuperar o corpo", rounds: 1, rest: 10, items: [["Cat_Cow", 40], ["Worlds_Greatest_Stretch", 45], ["Hip_Flexor_Stretch", 45], ["Hamstring_Stretch", 40], ["Cobra_Stretch", 30], ["Supine_Twist", 40], ["Childs_Pose", 40]] }
   };
+  // objetivos do app (o questionário e o cartão "Seu objetivo" usam esta lista): plano da semana e dieta de cada um
+  window.GOAL_DEFS = [
+    { id: "emagrecer", ic: "🔥", n: "Emagrecer", d: "Perder gordura com cardio e treino de corpo todo", plan: ["hiit", "geral", "perna", "hiit", "cintura"], kcal: -500, prot: 2.0, diet: "para emagrecer" },
+    { id: "massa", ic: "💪", n: "Ganhar massa e força", d: "Mais músculo: peito, costas, pernas e braços", plan: ["peito", "costas", "perna", "bracos", "geral"], kcal: 300, prot: 2.0, diet: "para ganhar massa" },
+    { id: "definir", ic: "✨", n: "Definir e tonificar", d: "Corpo firme e definido por inteiro", plan: ["geral", "tanquinho", "perna", "peito", "bunda"], kcal: -250, prot: 2.1, diet: "para definir" },
+    { id: "gluteos", ic: "🍑", n: "Glúteos e pernas", d: "Bumbum firme e pernas fortes", plan: ["bunda", "perna", "geral", "bunda", "cintura"], kcal: -200, prot: 1.9, diet: "para tonificar" },
+    { id: "saude", ic: "❤️", n: "Saúde e disposição", d: "Mais energia, fôlego e mobilidade no dia a dia", plan: ["geral", "mobilidade", "hiit", "perna", "mobilidade"], kcal: 0, prot: 1.6, diet: "para o dia a dia" },
+    { id: "abdomen", ic: "🎯", n: "Abdômen definido", d: "Foco no abdômen e na cintura (plano clássico de 90 dias)", plan: ["padrao", "tanquinho", "cintura"], kcal: -500, prot: 2.1, diet: "para definir o abdômen" }
+  ];
+  // nomes antigos do questionário → objetivos novos
+  window.GOAL_OLD = { barriga: "emagrecer", definir: "abdomen", forca: "massa", saude: "saude" };
   const ORIG = PLAN.map(p => p);
 
   function W() {

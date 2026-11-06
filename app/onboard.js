@@ -9,8 +9,11 @@
   const L = ml => (ml / 1000).toFixed(2).replace(".", ",").replace(/,00$/, "").replace(/(,\d)0$/, "$1") + " L";
   const dur = m => (m >= 60 ? Math.floor(m / 60) + "h" + (m % 60 ? " " + String(m % 60).padStart(2, "0") + "min" : "") : m + " min");
 
-  const GOALS = [["barriga", "🔥", "Perder barriga", "Queimar gordura e secar a cintura"], ["definir", "💎", "Definir o abdômen", "Deixar os gomos aparecendo"], ["forca", "💪", "Ganhar força", "Corpo mais forte e firme"], ["saude", "❤️", "Saúde e disposição", "Mais energia no dia a dia"]];
-  const FOCUS = [["padrao", "⭐", "Abdômen 90 dias", "O programa completo do app"], ["tanquinho", "🧱", "Tanquinho", "Abdômen inteiro"], ["cintura", "⏳", "Cintura fina", "Oblíquos e core"], ["bunda", "🍑", "Bumbum", "Glúteos"], ["peito", "🛡️", "Peito", "Peito e tríceps"], ["perna", "🦵", "Pernas", "Coxas e panturrilhas"], ["geral", "⚡", "Corpo todo", "Queima geral"]];
+  // objetivos (v2.17): cada um já sugere os treinos da semana; a pessoa pode ajustar no passo seguinte
+  const GOALS = (window.GOAL_DEFS || []).map(g => [g.id, g.ic, g.n, g.d]);
+  const FOCUS = [["geral", "⚡", "Corpo todo", "Força e queima geral"], ["hiit", "🔥", "Cardio HIIT", "Queima calorias rápido"], ["peito", "🛡️", "Peito", "Peito e tríceps"], ["costas", "🧭", "Costas", "Postura e costas"],
+    ["bracos", "💪", "Braços e ombros", "Bíceps, tríceps e ombros"], ["perna", "🏋️", "Pernas", "Coxas e panturrilhas"], ["bunda", "🍑", "Glúteos", "Bumbum firme"], ["tanquinho", "🎯", "Abdômen", "Abdômen inteiro"],
+    ["cintura", "⏳", "Cintura", "Oblíquos e core"], ["mobilidade", "🧘", "Mobilidade", "Alongar e soltar o corpo"], ["padrao", "⭐", "Plano de abdômen 90 dias", "O programa clássico do app"]];
   const LEVELS = [["ini", "🌱", "Iniciante", "Estou começando ou voltando agora", .85], ["int", "🔥", "Intermediário", "Treino de vez em quando", 1], ["ava", "🚀", "Avançado", "Treino sempre e aguento pesado", 1.15]];
   const ACT = [["sent", "🪑", "Sentado a maior parte do dia", 0], ["pe", "🚶", "Em pé, ando bastante", 350], ["pesado", "🏗️", "Trabalho pesado ou muito ativo", 700]];
   const DAYS = { 3: [0, 2, 4], 4: [0, 1, 3, 4], 5: [0, 1, 2, 3, 4], 6: [0, 1, 2, 3, 4, 5], 7: [0, 1, 2, 3, 4, 5, 6] };
@@ -26,7 +29,8 @@
     const cups = Math.ceil(ml / 250);
     const win = Math.max(4, (a.sleep > a.wake ? a.sleep - a.wake : a.sleep + 24 - a.wake) - 1) * 60; // para 1 h antes de dormir
     const every = Math.min(180, Math.max(20, Math.round(win / cups / 5) * 5));
-    const train = DAYS[a.days] || DAYS[5], focus = a.focus.length ? a.focus : ["padrao"];
+    const g = (window.GOAL_DEFS || []).find(x => x.id === a.goal);
+    const train = DAYS[a.days] || DAYS[5], focus = a.focus.length ? a.focus : (g ? g.plan : ["geral"]);
     const week = [0, 1, 2, 3, 4, 5, 6].map(d => {
       const k = train.indexOf(d);
       if (k < 0) return "rec";
@@ -48,7 +52,7 @@
     if (!S.wk || typeof S.wk !== "object") S.wk = {};
     S.wk.week = r.week;
     if (a.nick && window.netAcct && netAcct().name === "Jogador") netAcct().name = a.nick; // vira o nome no ranking também
-    S.plan = Object.assign({}, a, { water: r.water, cups: r.cups, every: r.every, card: true, at: todayStr() });
+    S.plan = Object.assign({}, a, { water: r.water, cups: r.cups, every: r.every, card: true, at: todayStr(), gv: 2 });
     if (window.wkApply) wkApply();
     save(); syncWater(true);
   }
@@ -61,7 +65,7 @@
   function body() {
     const a = OB.a, s = STEPS[OB.i];
     if (s === "goal") return '<h2>Qual é o seu objetivo?</h2><p>Vamos montar um plano só seu. Leva menos de 1 minuto.</p><div class="ob-list">' + GOALS.map(g => opt(g[0], g[1], g[2], g[3], a.goal === g[0], "data-obgoal")).join("") + '</div>';
-    if (s === "focus") return '<h2>O que você quer treinar?</h2><p>Escolha até 3. O app alterna entre eles nos dias de treino.</p><div class="ob-grid">' + FOCUS.map(g => opt(g[0], g[1], g[2], g[3], a.focus.includes(g[0]), "data-obfocus")).join("") + '</div>';
+    if (s === "focus") return '<h2>O que você quer treinar?</h2><p>Já marcamos o que combina com o seu objetivo. Troque se quiser (até 3); o app alterna entre eles nos dias de treino.</p><div class="ob-grid">' + FOCUS.map(g => opt(g[0], g[1], g[2], g[3], a.focus.includes(g[0]), "data-obfocus")).join("") + '</div>';
     if (s === "level") return '<h2>Qual é o seu nível?</h2><p>Ajusta o tempo de cada exercício e o descanso.</p><div class="ob-list">' + LEVELS.map(g => opt(g[0], g[1], g[2], g[3], a.level === g[0], "data-oblevel")).join("") + '</div>';
     if (s === "days") return '<h2>Quantos dias por semana?</h2><p>Nos outros dias o app passa um treino leve de recuperação.</p><div class="ob-days">' + [3, 4, 5, 6, 7].map(n => '<button type="button" data-obdays="' + n + '" class="' + (a.days === n ? "on" : "") + '"><b>' + n + '</b><small>dias</small></button>').join("") + '</div>' +
       '<div class="ob-week">' + WD.map((d, i) => '<span class="' + ((DAYS[a.days] || []).includes(i) ? "on" : "") + '">' + d + '</span>').join("") + '</div>';
@@ -120,6 +124,9 @@
     const a = OB.a;
     if (t.closest(".ob-screen button")) readBody(); // guarda o que foi digitado antes de redesenhar
     const pick = (sel, key, multi) => { const b = t.closest("[" + sel + "]"); if (!b) return false; const v = b.getAttribute(sel); if (multi) { const i = a[key].indexOf(v); if (i >= 0) a[key].splice(i, 1); else if (a[key].length < 3) a[key].push(v); else toast("Escolha até 3"); } else a[key] = isNaN(+v) || key === "sex" || key === "goal" || key === "level" || key === "act" ? v : +v; draw(); return true; };
+    // escolher o objetivo já marca os treinos sugeridos para ele (dá para mudar no passo seguinte)
+    const gb = t.closest("[data-obgoal]");
+    if (gb) { const g = (window.GOAL_DEFS || []).find(x => x.id === gb.getAttribute("data-obgoal")); if (g) a.focus = g.plan.slice(0, 3); }
     if (pick("data-obgoal", "goal") || pick("data-obfocus", "focus", true) || pick("data-oblevel", "level") || pick("data-obdays", "days") || pick("data-obsex", "sex") || pick("data-obact", "act")) return;
     if (t.closest("[data-obhot]")) { readBody(); a.hot = !a.hot; draw(); return; }
     if (t.closest("[data-obback]")) { readBody(); OB.i = Math.max(0, OB.i - 1); draw(); return; }
