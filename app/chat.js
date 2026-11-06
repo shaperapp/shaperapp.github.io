@@ -1,4 +1,4 @@
-/* Shaper · chat do grupo
+/* Ritmiq · chat do grupo
    Conversa rápida entre os membros, com fotos do treino. Cada mensagem (e foto) some sozinha
    em 24 horas: o servidor apaga e nem mostra as mais velhas. Atualiza a cada 4 s com o chat
    aberto; as fotos carregam à parte, só quando aparecem na conversa. */

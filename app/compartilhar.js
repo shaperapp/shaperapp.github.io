@@ -1,4 +1,4 @@
-/* Shaper · compartilhar treinos
+/* Ritmiq · compartilhar treinos
    Um treino montado vira um código de 6 letras (com QR code e link) guardado no servidor.
    Quem recebe digita o código, escaneia o QR ou abre o link e salva o treino igualzinho. */
 (function () {
@@ -40,9 +40,9 @@
     const url = LINK + code, img = NATIVE ? nat("qrImage", url, 720) : "";
     sheet('<div class="row between"><h2>Compartilhar treino</h2><button class="roundbtn" data-shclose aria-label="Fechar">' + IC.x + '</button></div>' +
       '<div class="gq-card sh-card"><b>' + esc(w.n) + '</b>' + (img ? '<img class="gq-img" alt="QR code do treino" src="' + img + '">' : "") + cells(code) +
-      '<span>Quem tiver o Shaper escaneia o QR ou digita o código em Treino → Importar</span></div>' +
+      '<span>Quem tiver o Ritmiq escaneia o QR ou digita o código em Treino → Importar</span></div>' +
       '<div class="gc-tacts" style="grid-template-columns:1fr 1fr"><button data-shcopy="' + code + '">Copiar código</button><button class="solid" data-shsend="' + code + '" data-shname="' + esc(w.n) + '">Enviar</button></div>' +
-      '<label class="wk-keep sh-pub"><input type="checkbox" data-shpub="' + code + '"><span><b>🌎 Mostrar na comunidade</b><small>Qualquer pessoa do Shaper pode achar e treinar esse treino.</small></span></label>' + preview(w), back);
+      '<label class="wk-keep sh-pub"><input type="checkbox" data-shpub="' + code + '"><span><b>🌎 Mostrar na comunidade</b><small>Qualquer pessoa do Ritmiq pode achar e treinar esse treino.</small></span></label>' + preview(w), back);
     try { const r = await Net.rpc("get_workout", { c: code }), cb = document.querySelector('[data-shpub="' + code + '"]'); if (cb) cb.checked = !!r.public; } catch (e) {}
   }
 
@@ -89,7 +89,7 @@
     sheet('<div class="sh-load"><i class="auth-spin"></i>Buscando treino ' + code + '…</div>');
     try {
       const r = await Net.rpc("get_workout", { c: code }), w = clean(r.data || {});
-      if (!w.items.length) throw new Error("Esse treino usa exercícios que este app ainda não tem. Atualize o Shaper.");
+      if (!w.items.length) throw new Error("Esse treino usa exercícios que este app ainda não tem. Atualize o Ritmiq.");
       pending = w;
       sheet('<div class="row between"><h2>Treino de ' + esc(r.author) + '</h2><button class="roundbtn" data-shclose aria-label="Fechar">' + IC.x + '</button></div>' +
         preview(w) + '<p class="note">Código ' + code + (r.uses ? ' · ' + r.uses + ' pessoa' + (r.uses > 1 ? "s" : "") + ' já importaram' : "") + '</p>' +
@@ -127,7 +127,7 @@
     if (b("[data-shclose]")) { closeLayer(); render(); return; }
     if ((x = b("[data-shcopy]"))) { const c = x.dataset.shcopy; try { await navigator.clipboard.writeText(c); toast("Código " + c + " copiado"); } catch (er) { if (NATIVE) nat("share", c); else toast(c); } return; }
     if ((x = b("[data-shsend]"))) {
-      const c = x.dataset.shsend, txt = "Treina comigo no Shaper! 💪 Meu treino \"" + x.dataset.shname + "\": " + LINK + c + " (ou importe com o código " + c + ")";
+      const c = x.dataset.shsend, txt = "Treina comigo no Ritmiq! 💪 Meu treino \"" + x.dataset.shname + "\": " + LINK + c + " (ou importe com o código " + c + ")";
       if (NATIVE) nat("share", txt); else if (navigator.share) navigator.share({ text: txt }).catch(() => {}); else { try { await navigator.clipboard.writeText(txt); toast("Link copiado"); } catch (er) { toast(c); } }
       return;
     }

@@ -1,4 +1,4 @@
-/* Shaper · boneco animado (versão leve da demonstração)
+/* Ritmiq · boneco animado (versão leve da demonstração)
    Um boneco vetorial (homem ou mulher, pelo perfil) faz cada exercício em loop, com
    movimento suave entre poses-chave. Leve: um SVG só, ~30 quadros/s, pausa fora da tela.
    Ângulos em graus no sentido horário a partir de "para cima" (90 = para frente/direita). */

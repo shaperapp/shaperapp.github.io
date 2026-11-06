@@ -1,4 +1,4 @@
-/* Shaper · Sistema
+/* Ritmiq · Sistema
    Nível, rank (E→S), atributos, missão diária com penalidade, chefes de fase, títulos
    e missões surpresa (agendadas pelo Android). Estado em S.sys: entra no backup e no reset. */
 (function () {

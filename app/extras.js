@@ -1,4 +1,4 @@
-/* Shaper · backup na nuvem, relatório de erros, funcionar com o app fechado, tema e tutorial */
+/* Ritmiq · backup na nuvem, relatório de erros, funcionar com o app fechado, tema e tutorial */
 (function () {
   "use strict";
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -78,7 +78,7 @@
     list.push({ ok: !!nat("batteryOk"), t: "Bateria sem restrições", d: "Sem isso o Android pode atrasar alarmes, lembretes de água e avisos do chat.", act: "bat", btn: "Liberar" });
     if (nat("exactAlarmAllowed") === false) list.push({ ok: false, t: "Alarmes no horário exato", d: "O fim de cada exercício toca na hora certa.", act: "exact", btn: "Permitir" });
     list.push({ ok: !!nat("overlayAllowed"), t: "Exibir sobre outros apps", d: "Para a bolha do treino, da água e dos desafios.", act: "overlay", btn: "Permitir" });
-    if (OEM.test(b)) list.push({ ok: localStorage.getItem("shaper.autostart") === "1", t: "Inicialização automática", d: "Seu " + esc(b.split(" ")[0]) + " fecha apps em segundo plano. Ative o Shaper na lista.", act: "auto", btn: "Abrir" });
+    if (OEM.test(b)) list.push({ ok: localStorage.getItem("shaper.autostart") === "1", t: "Inicialização automática", d: "Seu " + esc(b.split(" ")[0]) + " fecha apps em segundo plano. Ative o Ritmiq na lista.", act: "auto", btn: "Abrir" });
     return list;
   }
   function bgHTML() {
@@ -133,7 +133,7 @@
   vHome = function () {
     const h = _vHome(), k = h.indexOf("</h1></div>");
     if (k < 0 || !NATIVE || localStorage.getItem("shaper.bgHide") || nat("batteryOk")) return h;
-    const ban = '<div class="bg-ban"><span>🔋</span><div><b>Libere o Shaper na bateria</b><small>Assim alarmes e lembretes de água não atrasam.</small></div><button data-bggo>Ajustar</button><button class="x" data-bgok aria-label="Dispensar">✕</button></div>';
+    const ban = '<div class="bg-ban"><span>🔋</span><div><b>Libere o Ritmiq na bateria</b><small>Assim alarmes e lembretes de água não atrasam.</small></div><button data-bggo>Ajustar</button><button class="x" data-bgok aria-label="Dispensar">✕</button></div>';
     return h.slice(0, k + 11) + ban + h.slice(k + 11);
   };
 
@@ -154,7 +154,7 @@
     ["home", "🏠 Início", "Sua missão diária, a água do dia e o treino de hoje ficam aqui. Complete tudo para ganhar XP."],
     ["treino", "🏋️ Treino", "Comece o treino do dia, veja a semana e toque em “Montar meu treino” para criar o seu."],
     ["feed", "📸 Feed", "Poste fotos do treino, curta e comente o que a galera está fazendo."],
-    ["rank", "🏆 Ranking", "Compare seu XP com todas as pessoas que usam o Shaper, na semana ou no geral."],
+    ["rank", "🏆 Ranking", "Compare seu XP com todas as pessoas que usam o Ritmiq, na semana ou no geral."],
     ["grupo", "👥 Grupo", "Crie um grupo, chame amigos pelo QR code e converse no chat. Desafios surpresa valem XP em dobro."],
     ["mais", "➕ Mais", "Timer, Progresso, Dieta e Ajustes (conta, água, desafios e aparência) ficam aqui."]
   ];

@@ -1,4 +1,4 @@
-/* Shaper · janela flutuante do treino (picture-in-picture)
+/* Ritmiq · janela flutuante do treino (picture-in-picture)
    Ao sair do app no meio do treino, o Android encolhe o app numa janelinha por cima dos
    outros apps; aqui ela vira um cronômetro grande com anel de progresso. Também manda os
    detalhes da etapa para a notificação da tela de bloqueio. */

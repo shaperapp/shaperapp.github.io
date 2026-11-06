@@ -1,4 +1,4 @@
-/* Shaper · service worker da versão web: busca sempre a versão nova na internet e,
+/* Ritmiq · service worker da versão web: busca sempre a versão nova na internet e,
    sem conexão, usa a última cópia guardada (o treino funciona offline). */
 const C = "shaper-web-v1";
 self.addEventListener("install", e => self.skipWaiting());

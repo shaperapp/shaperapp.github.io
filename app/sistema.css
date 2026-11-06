@@ -1172,3 +1172,6 @@ nav.tabs{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;b
 html[data-theme="dark"] .ob2-ic{background:#1E2A47;color:#8FB0FF}html[data-theme="dark"] .ob2-opt.on{background:#1E2A47}
 .vz-box select{width:100%}.pl-ctrl .main{background:#2C66E0!important;color:#fff!important}
 html[data-theme="dark"] .pl-ctrl .main{background:#3D6CF0!important}
+
+/* v2.19: logo Ritmiq */
+.auth-mark .rq-mark{width:64%;height:64%;display:block}

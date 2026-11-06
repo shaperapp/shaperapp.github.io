@@ -1,4 +1,4 @@
-/* Shaper · biblioteca de exercícios
+/* Ritmiq · biblioteca de exercícios
    Exercícios extras (com e sem equipamento) somados aos do app. Cada um tem grupo muscular,
    equipamento, passo a passo, dica, pose do boneco animado (mq) e um vídeo demonstrativo
    (videos.js, de canais diferentes do YouTube, com o nome do canal nos créditos).

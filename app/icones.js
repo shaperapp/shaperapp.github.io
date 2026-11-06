@@ -1,4 +1,4 @@
-/* Shaper · ícones de linha no lugar dos emojis da interface (v2.15)
+/* Ritmiq · ícones de linha no lugar dos emojis da interface (v2.15)
    Depois de cada desenho da tela, troca os emojis dos botões, cartões e títulos por ícones do
    mesmo conjunto do resto do app. Não mexe no que as pessoas escrevem: posts, comentários,
    chat, nomes, avatares e campos de texto continuam como estão. */

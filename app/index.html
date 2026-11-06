@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#EDEFEC"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Shaper">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Ritmiq">
 <script>if("serviceWorker" in navigator&&location.protocol==="https:"&&!window.ShaperNative)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));</script>
-<title>Shaper</title>
+<title>Ritmiq</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preload" href="fonts/Figtree-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Archivo-800.woff2" as="font" type="font/woff2" crossorigin>
@@ -560,7 +560,7 @@ function vDieta(){const T=targets(),c=dayC();const PR=dayCounter("prot"),WA=dayC
 /* ================= Ajustes ================= */
 function vAjustes(){const r=S.reminder,p=S.profile,hh=String(r.h).padStart(2,"0")+":"+String(r.m).padStart(2,"0");
   const sw=(id,on,lab)=>'<label class="switch"><input id="'+id+'" type="checkbox"'+(on?" checked":"")+' aria-label="'+lab+'"><span></span></label>';
-  return '<div class="stack"><div><div class="greet">Shaper</div><h1>Ajustes</h1></div>'+
+  return '<div class="stack"><div><div class="greet">Ritmiq</div><h1>Ajustes</h1></div>'+
   '<div class="sec"><div class="sechead"><h3>Notificações</h3></div><div class="card" style="padding-block:4px">'+
    '<div class="setrow"><div><b>Lembrete diário de treino</b><span class="note">'+(NATIVE?"Não avisa se você já treinou no dia.":"Funciona no app Android instalado.")+'</span></div>'+sw("remOn",r.on,"Lembrete diário")+'</div>'+
    '<div class="setrow"><label class="f" style="flex:1">Horário do lembrete<input id="remTime" type="time" value="'+hh+'"></label></div>'+
@@ -660,7 +660,7 @@ setInterval(()=>{plTick();itTick()},200);
 /* ================= Eventos ================= */
 function backupJSON(){return JSON.stringify({app:"shaper",v:1,date:new Date().toISOString(),state:S,photos:PHOTOS})}
 function applyBackup(text){let o;try{o=JSON.parse(text)}catch(e){toast("Arquivo de backup inválido");return}
-  if(!o||o.app!=="shaper"||!o.state){toast("Este arquivo não é um backup do Shaper");return}
+  if(!o||o.app!=="shaper"||!o.state){toast("Este arquivo não é um backup do Ritmiq");return}
   const box=$("#bkConfirm");const go=()=>{const st=o.state;S=defaults();Object.assign(S,st);S.profile=Object.assign(defaults().profile,st.profile||{});S.reminder=Object.assign(defaults().reminder,st.reminder||{});
     const ph=Array.isArray(o.photos)?o.photos:null;(ph?DB.clear().then(()=>Promise.all(ph.map(p=>DB.put(p)))):Promise.resolve()).catch(()=>{}).then(loadPhotos).then(()=>{S.badgesSeen=badgeList().filter(b=>b[3]).map(b=>b[0]);save();tab="home";phSel=null;render();toast("Backup restaurado")})};
   if(box){box.innerHTML='<div class="confirm"><b>Restaurar este backup?</b><span class="note">De '+(o.date?new Date(o.date).toLocaleDateString("pt-BR"):"data desconhecida")+', com '+((o.state.history||[]).length)+' treinos'+(Array.isArray(o.photos)?' e '+o.photos.length+' fotos':' (as fotos do celular continuam)')+'. Os dados atuais serão substituídos.</span><div class="row"><button class="btn primary" style="flex:1" id="bkY">Restaurar</button><button class="btn" style="flex:1" id="bkN">Cancelar</button></div></div>';$("#bkY").onclick=go;$("#bkN").onclick=()=>{box.innerHTML=""}}else go()}

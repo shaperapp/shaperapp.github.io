@@ -1,4 +1,4 @@
-/* Shaper · conta e sincronização (Supabase via REST, sem biblioteca)
+/* Ritmiq · conta e sincronização (Supabase via REST, sem biblioteca)
    Login por e-mail/senha, perfil público (nome, emoji, XP, rank), registro de atividades
    para o ranking dos amigos. Funciona sem internet: as atividades ficam numa fila. */
 (function () {
@@ -282,7 +282,7 @@
   const field = (ic, inner) => '<label class="auth-field"><span class="auth-ic">' + AI[ic] + '</span>' + inner + '</label>';
   function authHTML(msg, ok) {
     const pw = mode !== "rec";
-    return '<div class="auth-wrap"><div class="auth-hero"><div class="auth-mark"><span>S</span></div><h1>Shaper</h1>' +
+    return '<div class="auth-wrap"><div class="auth-hero"><div class="auth-mark"><svg viewBox="96 60 360 360" class="rq-mark" aria-hidden="true"><path d="M136 388V234c0-46 30-74 76-74h16l36-68 44 240 30-104h34" fill="none" stroke="#fff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/><circle cx="402" cy="228" r="27" fill="#FFB547"/></svg></div><h1>Ritmiq</h1>' +
       '<p>Treine 90 dias, suba de rank e desafie seus amigos.</p>' +
       '<div class="auth-chips"><span>🏆 Ranking</span><span>⚔ Desafios</span><span>🔥 Sequência</span></div></div>' +
       '<div class="auth-box">' +

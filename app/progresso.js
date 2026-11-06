@@ -1,4 +1,4 @@
-/* Shaper · histórico por exercício, recordes, progressão automática e resumo da semana
+/* Ritmiq · histórico por exercício, recordes, progressão automática e resumo da semana
    No descanso depois de um exercício com meta de repetições, a pessoa marca quantas fez
    (vem preenchido com a meta). No fim do treino isso vira histórico (S.exlog), recordes e,
    no próximo treino, a meta sobe sozinha quando a pessoa bateu a anterior. */
@@ -94,7 +94,7 @@
     // nos treinos 3, 10 e 25 (quando a pessoa está curtindo) convida para chamar um amigo
     if ([3, 10, 25].includes(S.history.length) && window.inviteFriends) {
       const bt = hero.querySelector("#plDone");
-      if (bt) bt.insertAdjacentHTML("beforebegin", '<button class="mx-invite rp-inv" data-invite><span>📣</span><div><b>' + S.history.length + ' treinos! Chama alguém pra treinar junto</b><small>Mande o Shaper para um amigo</small></div><i>↗</i></button>');
+      if (bt) bt.insertAdjacentHTML("beforebegin", '<button class="mx-invite rp-inv" data-invite><span>📣</span><div><b>' + S.history.length + ' treinos! Chama alguém pra treinar junto</b><small>Mande o Ritmiq para um amigo</small></div><i>↗</i></button>');
     }
     const per = PL.per || {}, ids = Object.keys(per).filter(id => per[id].r);
     if (!ids.length && !(PL.prs || []).length) return;
@@ -149,7 +149,7 @@
     const c = cv.getContext("2d"), F = '"Archivo Black","Inter",system-ui,sans-serif', T = '"Inter",system-ui,sans-serif';
     const g = c.createLinearGradient(0, 0, 1080, 1350); g.addColorStop(0, "#0B1430"); g.addColorStop(.55, "#1A2A6C"); g.addColorStop(1, "#3B1F6E"); c.fillStyle = g; c.fillRect(0, 0, 1080, 1350);
     const gl = c.createRadialGradient(880, 160, 20, 880, 160, 520); gl.addColorStop(0, "rgba(91,140,255,.55)"); gl.addColorStop(1, "rgba(91,140,255,0)"); c.fillStyle = gl; c.fillRect(0, 0, 1080, 1350);
-    c.fillStyle = "#fff"; c.font = "800 44px " + T; c.fillText("SHAPER", 90, 130);
+    c.fillStyle = "#fff"; c.font = "800 44px " + T; c.fillText("RITMIQ", 90, 130);
     c.fillStyle = "rgba(255,255,255,.7)"; c.font = "500 34px " + T; c.fillText(fmtD(w.from) + " a " + fmtD(todayStr()), 90, 185);
     c.fillStyle = "#fff"; c.font = "900 96px " + F; c.fillText("Minha", 90, 330); c.fillText("semana", 90, 440);
     const name = (window.myName ? myName() : "Atleta").slice(0, 22); c.fillStyle = "#9DB8FF"; c.font = "700 44px " + T; c.fillText(name, 90, 510);
@@ -167,14 +167,14 @@
   async function shareWeek() {
     try { await document.fonts.ready; } catch (e) {}
     const cv = weekImage(), png = cv.toDataURL("image/png"), w = week();
-    const txt = "Minha semana no Shaper: " + w.n + " treinos, " + w.min + " minutos" + (w.prs ? ", " + w.prs + " recordes" : "") + " 💪";
+    const txt = "Minha semana no Ritmiq: " + w.n + " treinos, " + w.min + " minutos" + (w.prs ? ", " + w.prs + " recordes" : "") + " 💪";
     $("#layer").innerHTML = '<div class="scrim" id="scrim"><div class="sheet rp-sheet"><div class="row between"><h2>Resumo da semana</h2><button class="roundbtn" data-rpclose aria-label="Fechar">' + IC.x + '</button></div>' +
       '<img class="rp-img" alt="Resumo da semana" src="' + png + '">' +
       '<div class="row"><button class="btn primary" style="flex:1" data-rpout>↗ Compartilhar</button>' + (Net.on() && Net.user() && window.feedComposeWith ? '<button class="btn ghost" data-rpfeed>📸 Postar no feed</button>' : "") + '</div></div></div>';
     $("#scrim").onclick = e => { if (e.target.id === "scrim") closeLayer(); };
     $("[data-rpclose]").onclick = closeLayer;
     $("[data-rpout]").onclick = async () => {
-      if (NATIVE) { if (!nat("shareImage", png, txt)) { nat("share", txt); toast("Tire um print da imagem para postar"); } else toast("Imagem salva na galeria (Shaper)"); return; }
+      if (NATIVE) { if (!nat("shareImage", png, txt)) { nat("share", txt); toast("Tire um print da imagem para postar"); } else toast("Imagem salva na galeria (Ritmiq)"); return; }
       try { const f = new File([await (await fetch(png)).blob()], "shaper-semana.png", { type: "image/png" }); if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], text: txt }); return; } } catch (e) {}
       const a = document.createElement("a"); a.href = png; a.download = "shaper-semana.png"; a.click();
     };

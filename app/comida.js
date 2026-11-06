@@ -1,4 +1,4 @@
-/* Shaper · registro de refeições
+/* Ritmiq · registro de refeições
    Marque o que comeu em cada refeição (lista de alimentos brasileiros com porção caseira) ou
    digite um alimento com as calorias. Mostra calorias e macros do dia contra a meta da Dieta.
    Estado: S.food = {d, items:[{m, n, k, p, c, g}]}, S.foodLog = {data: kcal} (últimos 35 dias),

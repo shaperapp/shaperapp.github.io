@@ -1,4 +1,4 @@
-/* Shaper · versão web (iPhone e navegador)
+/* Ritmiq · versão web (iPhone e navegador)
    Só roda fora do app Android. Abre links de treino (?t=) e de grupo (?c=) vindos do site,
    mostra como instalar no iPhone (Safari → Compartilhar → Adicionar à Tela de Início) e,
    no Android pelo navegador, oferece o app completo. */
@@ -27,10 +27,10 @@
   const HIDE = "shaper.pwaHint";
   function hint() {
     if (STANDALONE || localStorage.getItem(HIDE)) return "";
-    if (IOS) return '<div class="card pw-hint"><div class="pw-top"><span>📲</span><div><b>Instale o Shaper no iPhone</b><small>Fica com ícone na tela e abre em tela cheia, como um app.</small></div><button class="pw-x" data-pwx aria-label="Fechar">×</button></div>' +
+    if (IOS) return '<div class="card pw-hint"><div class="pw-top"><span>📲</span><div><b>Instale o Ritmiq no iPhone</b><small>Fica com ícone na tela e abre em tela cheia, como um app.</small></div><button class="pw-x" data-pwx aria-label="Fechar">×</button></div>' +
       '<ol><li>Toque em <b>Compartilhar</b> <svg viewBox="0 0 24 24" class="pw-sh"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 11v9h14v-9"/></svg> na barra do Safari</li><li>Escolha <b>Adicionar à Tela de Início</b></li><li>Toque em <b>Adicionar</b></li></ol>' +
       (/CriOS|FxiOS|EdgiOS|Instagram|FBAN|FBAV/i.test(ua) ? '<p class="note">Abra este link no <b>Safari</b> para instalar.</p>' : "") + '</div>';
-    if (ANDROID) return '<div class="card pw-hint"><div class="pw-top"><span>🤖</span><div><b>Tem Android? Baixe o app completo</b><small>Com alarme com a tela desligada, bolha do treino, widgets e contador de passos.</small></div><button class="pw-x" data-pwx aria-label="Fechar">×</button></div><a class="btn primary block" href="../Shaper.apk" download>⬇ Baixar para Android</a></div>';
+    if (ANDROID) return '<div class="card pw-hint"><div class="pw-top"><span>🤖</span><div><b>Tem Android? Baixe o app completo</b><small>Com alarme com a tela desligada, bolha do treino, widgets e contador de passos.</small></div><button class="pw-x" data-pwx aria-label="Fechar">×</button></div><a class="btn primary block" href="../Ritmiq.apk" download>⬇ Baixar para Android</a></div>';
     return "";
   }
   const _vh = vHome;

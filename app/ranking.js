@@ -1,4 +1,4 @@
-/* Shaper · Ranking geral: todas as pessoas que usam o app (as que deixam o perfil público).
+/* Ritmiq · Ranking geral: todas as pessoas que usam o app (as que deixam o perfil público).
    Semana (XP dos últimos 7 dias) ou Geral (XP total), pódio, sua posição e top 100. */
 (function () {
   "use strict";
@@ -22,9 +22,9 @@
   }
 
   function vGlobal() {
-    const head = '<div><div class="greet">Todos que usam o Shaper</div><h1>Ranking</h1></div>';
+    const head = '<div><div class="greet">Todos que usam o Ritmiq</div><h1>Ranking</h1></div>';
     if (!Net.on()) return '<div class="stack">' + head + '<div class="card"><p class="note">O servidor do ranking ainda não foi configurado.</p></div></div>';
-    if (!Net.user()) return '<div class="stack">' + head + '<div class="rk-hero"><div class="rk-trophy">🌎</div><h2>Ranking de todo mundo</h2><p>Compare seu XP com todas as pessoas que treinam com o Shaper.</p><button class="btn primary block" data-login>Entrar ou criar conta</button></div></div>';
+    if (!Net.user()) return '<div class="stack">' + head + '<div class="rk-hero"><div class="rk-trophy">🌎</div><h2>Ranking de todo mundo</h2><p>Compare seu XP com todas as pessoas que treinam com o Ritmiq.</p><button class="btn primary block" data-login>Entrar ou criar conta</button></div></div>';
     if (!R.loaded) { load(); return '<div class="stack">' + head + '<div class="card rk-skel"></div><div class="card rk-skel" style="height:260px"></div></div>'; }
     const val = p => R.mode === "week" ? p.week_xp : p.xp, list = R.rows, mine = list.find(p => p.user_id === me());
     const top = list.filter(p => p.pos <= 100);

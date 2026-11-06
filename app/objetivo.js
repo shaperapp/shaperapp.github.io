@@ -1,4 +1,4 @@
-/* Shaper · objetivo da pessoa no centro do app (v2.17)
+/* Ritmiq · objetivo da pessoa no centro do app (v2.17)
    O abdômen deixa de ser o alvo principal. Cada objetivo (emagrecer, ganhar massa, definir,
    glúteos e pernas, saúde, abdômen) monta a semana de treinos e ajusta a dieta (calorias e
    proteína). Dá para trocar a qualquer momento pelo cartão "Seu objetivo" no Início ou em Ajustes;

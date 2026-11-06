@@ -1,4 +1,4 @@
-/* Shaper · Feed: posts com texto e foto, curtidas e comentários
+/* Ritmiq · Feed: posts com texto e foto, curtidas e comentários
    As fotos vão para o Storage do Supabase (1280 px); o post guarda só o caminho.
    Cada post pode ser para todos ou só para quem está nos seus grupos. */
 (function () {

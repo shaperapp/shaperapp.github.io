@@ -1,4 +1,4 @@
-/* Shaper · vídeos no formato certo e Versão leve sem fotos (v2.16)
+/* Ritmiq · vídeos no formato certo e Versão leve sem fotos (v2.16)
    - Vídeos verticais (Shorts) aparecem numa moldura em pé, sem faixas pretas; os deitados
      ficam em 16:9. A lista dos verticais foi conferida no YouTube; links colados pela pessoa
      com "/shorts/" também entram como verticais.

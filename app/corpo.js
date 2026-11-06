@@ -1,4 +1,4 @@
-/* Shaper · modo academia, mapa muscular, antes e depois e passos do dia
+/* Ritmiq · modo academia, mapa muscular, antes e depois e passos do dia
    - Carga em kg: nos exercícios com halter/kettlebell, no descanso a pessoa marca o peso usado.
      Vai para S.exlog (campo kg), vira recorde de carga e aparece na próxima vez.
    - Mapa muscular: corpo de frente e de costas colorido pelas séries feitas nos últimos 7 dias.
@@ -96,8 +96,8 @@
     [[a, 280], [b, 800]].forEach(([p, cx]) => { x.fillStyle = "rgba(11,16,32,.75)"; x.fillRect(cx - 150, 1080, 300, 60); x.fillStyle = "#fff"; x.fillText(fmtD(p.d), cx, 1124); });
     const facts = [days + " dias"]; if (kg0 && Math.abs(kg0 - kg1) >= .1) facts.push((kg1 - kg0 > 0 ? "+" : "") + fmtKg(kg1 - kg0) + " kg"); if (w0 && w1 && w0 !== w1) facts.push((w1 - w0 > 0 ? "+" : "") + fmtKg(w1 - w0) + " cm de cintura");
     x.font = "800 50px system-ui, sans-serif"; x.fillStyle = "#7DA2FF"; x.fillText(facts.join("  ·  "), 540, 1230);
-    x.font = "600 34px system-ui, sans-serif"; x.fillStyle = "rgba(255,255,255,.7)"; x.fillText("Treinando com o Shaper", 540, 1300);
-    const png = cv.toDataURL("image/jpeg", .9), txt = "Meu antes e depois: " + facts.join(" · ") + " 💪 #Shaper";
+    x.font = "600 34px system-ui, sans-serif"; x.fillStyle = "rgba(255,255,255,.7)"; x.fillText("Treinando com o Ritmiq", 540, 1300);
+    const png = cv.toDataURL("image/jpeg", .9), txt = "Meu antes e depois: " + facts.join(" · ") + " 💪 #Ritmiq";
     const d = document.createElement("div"); d.className = "scrim"; d.style.zIndex = 80;
     d.innerHTML = '<div class="sheet"><div class="row between"><h2>Antes e depois</h2><button class="roundbtn" data-x aria-label="Fechar">' + IC.x + '</button></div><img class="ba-img" alt="Antes e depois" src="' + png + '"><div class="row"><button class="btn primary" style="flex:1" data-bashare>Compartilhar</button><button class="btn ghost" style="flex:1" data-bafeed>Postar no Feed</button></div><p class="note">A imagem só sai do celular se você compartilhar.</p></div>';
     document.body.appendChild(d);
@@ -105,7 +105,7 @@
       if (e.target === d || e.target.closest("[data-x]")) d.remove();
       if (e.target.closest("[data-bafeed]") && window.feedComposeWith) { d.remove(); closeLayer(); tab = "feed"; render(); feedComposeWith(png, txt); }
       if (e.target.closest("[data-bashare]")) {
-        if (NATIVE) { if (!nat("shareImage", png, txt)) toast("Tire um print da imagem para postar"); else toast("Imagem salva na galeria (Shaper)"); return; }
+        if (NATIVE) { if (!nat("shareImage", png, txt)) toast("Tire um print da imagem para postar"); else toast("Imagem salva na galeria (Ritmiq)"); return; }
         try { const f = new File([await (await fetch(png)).blob()], "shaper-antes-depois.jpg", { type: "image/jpeg" }); if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], text: txt }); return; } } catch (er) {}
         const a2 = document.createElement("a"); a2.href = png; a2.download = "shaper-antes-depois.jpg"; a2.click();
       }

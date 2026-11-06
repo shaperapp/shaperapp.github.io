@@ -1,4 +1,4 @@
-/* Shaper · leitor de QR code ao vivo para entrar num grupo
+/* Ritmiq · leitor de QR code ao vivo para entrar num grupo
    Abre a câmera dentro do app e lê o QR sozinho (cerca de 4 quadros por segundo). Lê só o
    quadrado da mira (mais rápido e mais certeiro). No Android cada quadro é decodificado pelo
    app (ZXing); no navegador usa o BarcodeDetector, se houver. Tem lanterna quando o celular deixa. */

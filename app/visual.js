@@ -1,4 +1,4 @@
-/* Shaper · visual novo do Início (v2.13)
+/* Ritmiq · visual novo do Início (v2.13)
    Ordem: saudação → treino de hoje (grande, no topo) → cartão do Sistema com as missões →
    passos → semana → plano de 90 dias (recolhido) → dica. Usa o HTML que os outros módulos
    já montam e só reorganiza, então tudo continua funcionando igual (botões, missões, chefe). */

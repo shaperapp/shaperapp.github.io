@@ -1,4 +1,4 @@
-/* Shaper · inglês e espanhol, e botão de transmitir para a TV
+/* Ritmiq · inglês e espanhol, e botão de transmitir para a TV
    Idioma em S.lang ("pt", "en" ou "es"). Traduz os nomes dos exercícios, a voz do treinador e os
    textos principais da tela (abas, títulos, botões, player). O passo a passo dos exercícios e
    alguns textos longos continuam em português. Primeiro uso: segue o idioma do celular. */

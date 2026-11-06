@@ -1,4 +1,4 @@
-/* Shaper · fluidez
+/* Ritmiq · fluidez
    O render original trocava o innerHTML da tela inteira a cada toque: recarregava o vídeo
    do YouTube, redecodificava as fotos e matava as transições. Aqui a tela nova é comparada
    com a atual e só o que mudou é alterado. Ao trocar de aba entra com animação. */

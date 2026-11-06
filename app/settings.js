@@ -1,4 +1,4 @@
-/* Shaper · aba Ajustes organizada
+/* Ritmiq · aba Ajustes organizada
    Junta as seções (do app original e das novas) em grupos que abrem e fecham, com um cartão de
    perfil no topo, atalhos rápidos e busca. Também traz o horário das missões surpresa. */
 (function () {

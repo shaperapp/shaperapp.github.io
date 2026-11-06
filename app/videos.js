@@ -1,4 +1,4 @@
-/* Shaper · vídeos dos exercícios da biblioteca: [id do YouTube, canal]. Gerado buscando
+/* Ritmiq · vídeos dos exercícios da biblioteca: [id do YouTube, canal]. Gerado buscando
    vídeos HD, curtos e que permitem exibição em apps, um canal diferente para cada exercício. */
 window.LIB_VID = {
 "Bulgarian_Split_Squat":["beqcqA6I0oM","Range Physio"],

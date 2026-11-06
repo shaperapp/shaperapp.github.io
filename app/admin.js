@@ -1,4 +1,4 @@
-/* Shaper · Painel do admin: visão geral, pessoas (XP, rank, suspensão), denúncias,
+/* Ritmiq · Painel do admin: visão geral, pessoas (XP, rank, suspensão), denúncias,
    conversas dos grupos, posts, erros e histórico. Tudo passa por funções admin_* do
    servidor, que conferem se quem chama é admin; o app só esconde a entrada dos outros. */
 (function () {

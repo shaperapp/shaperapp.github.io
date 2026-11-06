@@ -1,4 +1,4 @@
-/* Shaper · ranking entre amigos
+/* Ritmiq · ranking entre amigos
    Grupos de até 25 pessoas, pódio da semana/geral, feed do que cada um treinou e o
    desafio surpresa do grupo (XP em dobro com prova). A prova original fica só no celular;
    o servidor guarda uma prévia pequena que se apaga sozinha em 10 minutos. */
@@ -324,7 +324,7 @@
     const sl = t.closest("[data-gsel]"); if (sl) { G.cur = sl.dataset.gsel; localStorage.setItem("shaper.grp", G.cur); G.loaded = false; render(); return; }
     const mb = t.closest("[data-gmember]"); if (mb) { openMember(mb.dataset.gmember); return; }
     const sh = t.closest("[data-gshare]");
-    if (sh) { const txt = "Bora treinar comigo no Shaper! 💪 Entre no meu grupo: " + joinUrl(sh.dataset.gshare) + " (ou use o código " + sh.dataset.gshare + ")"; if (NATIVE) nat("share", txt); else { try { navigator.clipboard.writeText(txt); toast("Convite copiado"); } catch (er) { toast(sh.dataset.gshare); } } return; }
+    if (sh) { const txt = "Bora treinar comigo no Ritmiq! 💪 Entre no meu grupo: " + joinUrl(sh.dataset.gshare) + " (ou use o código " + sh.dataset.gshare + ")"; if (NATIVE) nat("share", txt); else { try { navigator.clipboard.writeText(txt); toast("Convite copiado"); } catch (er) { toast(sh.dataset.gshare); } } return; }
     const qb = t.closest("[data-gqr]"); if (qb) { showQr(qb.dataset.gqr); return; }
     const sc = t.closest("[data-gscan]");
     if (sc) {
@@ -410,7 +410,7 @@
     $("#layer").innerHTML = '<div class="scrim" id="scrim"><div class="sheet gq-sheet"><div class="row between"><h2>Convite do grupo</h2><button class="roundbtn" data-gclose aria-label="Fechar">' + IC.x + '</button></div>' +
       '<div class="gq-card"><b>' + esc(g ? g.name : "Grupo") + '</b>' +
       (img ? '<img class="gq-img" alt="QR code do grupo" src="' + img + '">' : '<div class="gq-img gq-none">QR code disponível no app Android</div>') +
-      cells(code, true) + '<span>Aponte a câmera do celular ou use “Escanear QR” no Shaper</span></div>' +
+      cells(code, true) + '<span>Aponte a câmera do celular ou use “Escanear QR” no Ritmiq</span></div>' +
       '<div class="gc-tacts" style="grid-template-columns:1fr 1fr"><button data-gcopy="' + esc(code) + '">Copiar código</button><button class="solid" data-gshare="' + esc(code) + '">Mandar convite</button></div>' +
       '<span class="gq-or">ou entre no grupo de outra pessoa</span><button class="gq-scan" data-gscan="camera">📷 Escanear QR de outro grupo</button></div></div>';
     $("#scrim").onclick = e => { if (e.target.id === "scrim") closeLayer(); };
@@ -427,7 +427,7 @@
   };
   window.qrScanned = txt => {
     const c = codeFrom(txt);
-    if (!c) { toast("Esse QR não é de um grupo do Shaper"); return; }
+    if (!c) { toast("Esse QR não é de um grupo do Ritmiq"); return; }
     window.grpJoinLink(c);
   };
   window.grpJoinLink = code => {

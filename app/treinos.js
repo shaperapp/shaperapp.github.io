@@ -1,4 +1,4 @@
-/* Shaper · editor de treinos
+/* Ritmiq · editor de treinos
    Treinos padrão por objetivo (tanquinho, cintura, bunda, peito, perna, geral), treinos
    próprios e a escolha de qual treino cai em cada dia da semana. Estado em S.wk. */
 (function () {

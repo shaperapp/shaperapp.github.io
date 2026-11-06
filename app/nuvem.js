@@ -1,4 +1,4 @@
-/* Shaper · backup na nuvem completo
+/* Ritmiq · backup na nuvem completo
    O backup dos números (extras.js) agora vem ligado por padrão para quem entra na conta, e as
    fotos de progresso também vão para a nuvem num espaço privado (bucket "fotos", pasta com o id
    da pessoa: só ela vê). Celular novo: as fotos voltam sozinhas. Apagar uma foto apaga lá também. */

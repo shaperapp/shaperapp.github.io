@@ -1,4 +1,4 @@
-/* Shaper · voz da treinadora (v2.17)
+/* Ritmiq · voz da treinadora (v2.17)
    Voz feminina fixa, suave e clara. No Android quem cuida é o Voice.java (escolhe uma voz
    feminina instalada e offline, que não muda no meio do treino). No iPhone/navegador usamos a voz
    feminina do sistema (Luciana, Francisca, Google português…). Em todos: a contagem 3, 2, 1 entra

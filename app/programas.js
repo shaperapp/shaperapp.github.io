@@ -1,4 +1,4 @@
-/* Shaper · programas com tema, plano que se adapta e escudo da sequência
+/* Ritmiq · programas com tema, plano que se adapta e escudo da sequência
    - Programas: "30 dias de abdômen", "Iniciante absoluto", "Glúteo em 4 semanas", "Pós-parto",
      "Acima de 50" e "Alongamento ao acordar". Cada dia é um treino que fica um pouco mais
      difícil ao longo do programa. Estado em S.pg = {id, start, done:{dia:data}}.

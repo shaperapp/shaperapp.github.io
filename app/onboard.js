@@ -1,4 +1,4 @@
-/* Shaper · boas-vindas e plano de água
+/* Ritmiq · boas-vindas e plano de água
    Usuário novo responde um mini formulário (objetivo, foco, nível, dias, corpo e rotina).
    Com isso o app monta a semana de treinos, calcula quantos litros beber por dia e de
    quanto em quanto tempo lembrar. O cartão da água fica na tela até bater a meta. */
@@ -205,7 +205,7 @@
   document.addEventListener("click", e => {
     if (!e.target.closest("[data-wrtest]")) return;
     if (!NATIVE) { toast("O teste funciona no app Android"); return; }
-    if (nat("notifAllowed") === false) { nat("requestNotificationPermission"); toast("Permita as notificações do Shaper e teste de novo"); return; }
+    if (nat("notifAllowed") === false) { nat("requestNotificationPermission"); toast("Permita as notificações do Ritmiq e teste de novo"); return; }
     nat("waterTest", 5);
     toast("Saia do app agora (botão início). Em 5 s chega o lembrete com som, aviso e bolha 💧");
   });
