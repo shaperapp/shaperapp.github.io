@@ -2,160 +2,140 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Shaper · Treino em casa</title>
-<meta name="description" content="Shaper: treinos guiados com vídeo, 149 exercícios, ranking com amigos e desafios surpresa. Grátis para Android e iPhone.">
-<meta property="og:title" content="Shaper · Treino em casa">
-<meta property="og:description" content="Treinos guiados com vídeo, ranking com amigos e desafios surpresa. Grátis para Android e iPhone.">
-<meta property="og:image" content="https://shaperapp.github.io/img/home.jpg">
-<meta name="theme-color" content="#0A1230">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Shaper · Treino em casa com vídeo, voz e ranking</title>
+<meta name="description" content="Treinos guiados com vídeo e voz para o seu objetivo: emagrecer, ganhar massa, definir, glúteos ou saúde. 149 exercícios, programas e ranking com amigos. Grátis para Android e iPhone.">
+<link rel="canonical" href="https://shaperapp.github.io/">
+<meta name="theme-color" content="#0B1430">
+<link rel="icon" href="app/icon-192.png">
+<link rel="apple-touch-icon" href="app/icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shaper">
+<meta property="og:title" content="Shaper · Treine em casa e evolua todo dia">
+<meta property="og:description" content="Treinos guiados com vídeo e voz para o seu objetivo, com ranking entre amigos. Grátis para Android e iPhone.">
+<meta property="og:url" content="https://shaperapp.github.io/">
+<meta property="og:image" content="https://shaperapp.github.io/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://shaperapp.github.io/img/og.jpg">
+<link rel="stylesheet" href="app/fonts.css">
 <style>
-  :root{--bg:#0A1230;--fg:#fff;--muted:#B9C6EE;--card:rgba(255,255,255,.06);--line:rgba(255,255,255,.12);--a1:#4D7CFF;--a2:#8A5CFF}
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:radial-gradient(90% 50% at 10% 0%,rgba(61,108,240,.55),transparent 60%),radial-gradient(70% 50% at 100% 25%,rgba(138,92,255,.45),transparent 60%),var(--bg);background-repeat:no-repeat;color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-  a{color:inherit}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
-  header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;text-decoration:none}
-  .logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--a1),var(--a2));display:grid;place-items:center;font-weight:900;font-size:1.3rem;box-shadow:0 8px 22px rgba(90,100,255,.45)}
-  header nav a{color:var(--muted);text-decoration:none;font-weight:600;margin-left:18px;font-size:.95rem}
-  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:40px 0 60px}
-  .pill{display:inline-block;padding:6px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-size:.82rem;font-weight:700;color:var(--muted)}
-  h1{font-size:clamp(2.3rem,6vw,3.6rem);line-height:1.05;margin:16px 0 14px;letter-spacing:-.02em}
-  h1 span{background:linear-gradient(90deg,#8FB0FF,#C3A6FF);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lead{font-size:1.15rem;color:var(--muted);margin:0 0 26px;max-width:34ch}
-  .cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 24px;border-radius:16px;font-weight:800;text-decoration:none;font-size:1.05rem}
-  .btn.main{background:linear-gradient(135deg,#3D6CF0,#7B5CFF);box-shadow:0 12px 30px rgba(90,100,255,.45)}
-  .btn.ghost{background:var(--card);border:1px solid var(--line)}
-  .small{font-size:.85rem;color:var(--muted);margin-top:12px}
-  .phones{position:relative;height:560px}
-  .ph{position:absolute;width:250px;aspect-ratio:1/2;border-radius:38px;background:#05070D;padding:8px;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 0 2px var(--line)}
-  .ph img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:31px;display:block}
-  .ph.a{left:6%;top:30px;transform:rotate(-5deg)}.ph.b{right:6%;top:0;transform:rotate(4deg)}
-  section{padding:56px 0}
-  h2{font-size:clamp(1.7rem,4vw,2.4rem);margin:0 0 10px;letter-spacing:-.01em}
-  .sub{color:var(--muted);margin:0 0 30px;max-width:56ch}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  .f{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px}
-  .f i{font-style:normal;font-size:1.8rem}.f b{display:block;font-size:1.1rem;margin:8px 0 4px}.f p{margin:0;color:var(--muted);font-size:.95rem}
-  .shots{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 16px;scrollbar-width:thin}
-  .shots figure{flex:none;width:220px;margin:0;scroll-snap-align:start}
-  .shots img{width:100%;aspect-ratio:1/2;object-fit:cover;object-position:top;border-radius:26px;border:6px solid #05070D;box-shadow:0 18px 40px rgba(0,0,0,.4)}
-  .shots figcaption{text-align:center;color:var(--muted);font-size:.88rem;margin-top:8px}
-  .steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  .steps div{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 20px 20px 64px;position:relative}
-  .steps div::before{counter-increment:s;content:counter(s);position:absolute;left:18px;top:18px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:linear-gradient(135deg,var(--a1),var(--a2))}
-  .steps b{display:block}.steps span{color:var(--muted);font-size:.92rem}
-  details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 18px;margin-bottom:10px}
-  summary{cursor:pointer;font-weight:700}details p{color:var(--muted);margin:10px 0 0}
-  h3.os{margin:26px 0 12px;font-size:1.15rem}
-  .final{text-align:center;background:linear-gradient(135deg,rgba(61,108,240,.35),rgba(138,92,255,.35));border:1px solid var(--line);border-radius:28px;padding:44px 20px;margin:20px 0 40px}
-  footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:.9rem;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
-  footer a{color:var(--muted)}
-  @media (max-width:860px){
-    .hero{grid-template-columns:1fr;text-align:center;padding-top:20px}.lead{margin-left:auto;margin-right:auto}.cta{justify-content:center}
-    .phones{height:430px;max-width:420px;margin:0 auto;width:100%}.ph{width:190px}.ph.a{left:2%}.ph.b{right:2%}
-    .grid,.steps{grid-template-columns:1fr}
-    header nav{display:none}
-  }
+:root{--bg:#F4F6FA;--card:#fff;--fg:#0E1424;--muted:#5B6478;--line:#E3E7EF;--blue:#2C66E0;--blue2:#1F4FBF;--blue-bg:#E8EFFD;--navy:#0B1430;--r:22px;--display:"Archivo","Arial Black",system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 "Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%;display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+header{position:sticky;top:0;z-index:20;background:rgba(11,20,48,.94);border-bottom:1px solid rgba(255,255,255,.08);color:#fff}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;text-decoration:none}
+.logo{width:38px;height:38px;border-radius:11px;background:var(--blue);display:grid;place-items:center;font-family:var(--display);font-size:1.2rem}
+nav.top{display:flex;align-items:center;gap:26px}nav.top a{text-decoration:none;color:#C6D3F5;font-weight:600;font-size:.95rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 24px;border-radius:15px;font-weight:800;text-decoration:none;font-size:1.02rem;border:0;cursor:pointer;font-family:inherit}
+.btn.main{background:var(--blue);color:#fff;box-shadow:0 10px 26px rgba(44,102,224,.35)}.btn.light{background:#fff;color:var(--fg)}
+.btn.ghost{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.22)}.btn.out{background:var(--card);color:var(--fg);border:1px solid var(--line)}
+.btn.sm{padding:10px 16px;font-size:.9rem;border-radius:12px}
+.hero{background:radial-gradient(60% 90% at 0% 0%,rgba(44,102,224,.55),transparent 60%),radial-gradient(50% 70% at 100% 100%,rgba(70,55,170,.5),transparent 60%),var(--navy);color:#fff;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding-top:70px;padding-bottom:80px}
+.tag{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);font-size:.85rem;font-weight:700;color:#C6D3F5}.tag i{width:8px;height:8px;border-radius:50%;background:#4CC283}
+h1{font-family:var(--display);font-size:clamp(2.4rem,5.6vw,3.9rem);line-height:1.03;margin:18px 0 16px;letter-spacing:-.025em}h1 span{color:#8FB0FF}
+.lead{font-size:1.15rem;color:#C6D3F5;margin:0 0 28px;max-width:36ch}.cta{display:flex;flex-wrap:wrap;gap:12px}.small{font-size:.86rem;color:#9FB0D6;margin-top:14px}
+.phones{position:relative;height:580px}.ph{position:absolute;width:262px;aspect-ratio:1/2;border-radius:40px;background:#05070D;padding:9px;box-shadow:0 40px 80px rgba(0,0,0,.55)}
+.ph img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:32px}.ph.a{left:4%;top:50px;transform:rotate(-6deg)}.ph.b{right:4%;top:0;transform:rotate(5deg)}
+.stats{background:var(--card);border-bottom:1px solid var(--line)}.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:26px 20px;text-align:center}
+.stats b{display:block;font-family:var(--display);font-size:2rem;color:var(--blue);line-height:1.1}.stats span{color:var(--muted);font-size:.92rem}
+section{padding:84px 0}.eyebrow{color:var(--blue);font-weight:800;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase}
+h2{font-family:var(--display);font-size:clamp(1.8rem,3.6vw,2.6rem);margin:8px 0 12px;letter-spacing:-.02em;line-height:1.1}.sub{color:var(--muted);margin:0 0 36px;max-width:60ch;font-size:1.06rem}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.ib{width:48px;height:48px;border-radius:14px;background:var(--blue-bg);color:var(--blue);display:grid;place-items:center;margin-bottom:14px;flex:none}
+.card b{display:block;font-size:1.12rem;margin-bottom:4px}.card p{margin:0;color:var(--muted);font-size:.97rem}.goal{display:flex;gap:14px}.goal .ib{margin:0}
+.dark{background:var(--navy);color:#fff}.dark .sub{color:#9FB0D6}.dark .eyebrow{color:#8FB0FF}
+.shots{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 2px 20px}.shots figure{flex:none;width:232px;margin:0;scroll-snap-align:start}
+.shots img{width:100%;aspect-ratio:1/2;object-fit:cover;object-position:top;border-radius:30px;border:7px solid #05070D}.shots figcaption{text-align:center;color:#C6D3F5;font-size:.92rem;margin-top:10px;font-weight:600}
+.dl{display:grid;grid-template-columns:1fr 1fr;gap:16px}.dl .card{display:flex;flex-direction:column;gap:14px;padding:28px}.dl h3{margin:0;font-size:1.35rem;display:flex;align-items:center;gap:10px}
+.dl ol{margin:0;padding-left:20px;color:var(--muted)}.dl .btn{align-self:flex-start}
+.qr{display:flex;align-items:center;gap:18px;margin-top:20px}.qr .box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px;width:136px;height:136px;display:grid;place-items:center}.qr p{margin:0;color:var(--muted)}
+details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin-bottom:10px}summary{cursor:pointer;font-weight:700}details p{color:var(--muted);margin:10px 0 0}
+.final{background:var(--blue);color:#fff;border-radius:28px;padding:52px 28px;text-align:center;margin-top:44px}.final p{color:#DCE6FF;margin:0 auto 24px;max-width:46ch}.final .cta{justify-content:center}
+footer{padding:34px 0 90px;color:var(--muted);font-size:.92rem}footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;border-top:1px solid var(--line);padding-top:24px}footer a{color:var(--muted);text-decoration:none;margin-left:16px}
+.share{position:fixed;right:18px;bottom:18px;z-index:30;display:flex;align-items:center;gap:8px;background:#25D366;color:#fff;border:0;border-radius:99px;padding:13px 18px;font:800 .95rem "Figtree",sans-serif;box-shadow:0 10px 26px rgba(0,0,0,.25);cursor:pointer}
+.toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);background:var(--fg);color:#fff;padding:10px 16px;border-radius:12px;font-weight:600;z-index:40}
+@media (max-width:900px){nav.top a:not(.btn){display:none}.hero .wrap{grid-template-columns:1fr;text-align:center;padding-top:40px;padding-bottom:56px}.lead{margin-left:auto;margin-right:auto}.cta{justify-content:center}
+.phones{height:440px;max-width:430px;margin:0 auto;width:100%}.ph{width:196px}.ph.a{left:2%}.ph.b{right:2%}.stats .wrap{grid-template-columns:repeat(2,1fr)}.grid,.dl{grid-template-columns:1fr}section{padding:60px 0}.qr{display:none}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <a class="brand" href="#"><span class="logo">S</span>Shaper</a>
-    <nav><a href="#recursos">Recursos</a><a href="#telas">Telas</a><a href="#instalar">Como instalar</a></nav>
-  </header>
-
-  <div class="hero">
-    <div>
-      <span class="pill">💪 Grátis · Android e iPhone · sem anúncios</span>
-      <h1>Treine em casa e <span>evolua todo dia</span></h1>
-      <p class="lead">Treinos guiados com vídeo e voz, 149 exercícios, ranking com os amigos e desafios surpresa. Seu plano de 90 dias no bolso.</p>
-      <div class="cta" id="cta">
-        <a class="btn main" id="dlAndroid" href="Shaper.apk" download>⬇ Baixar para Android</a>
-        <a class="btn ghost" id="dlIos" href="#iphone"> Instalar no iPhone</a>
-      </div>
-      <p class="small">Android: versão 2.15 · 1,6 MB · Android 8 ou mais novo · iPhone: pelo Safari, sem App Store</p>
-    </div>
-    <div class="phones" aria-hidden="true">
-      <div class="ph a"><img src="img/player.jpg" alt=""></div>
-      <div class="ph b"><img src="img/home.jpg" alt=""></div>
-    </div>
-  </div>
-</div>
-
-<section id="recursos"><div class="wrap">
-  <h2>Tudo para você não parar</h2>
-  <p class="sub">Feito para quem treina em casa, sem academia e sem equipamento, mas que também funciona com halter, elástico e barra.</p>
-  <div class="grid">
-    <div class="f"><i>🎥</i><b>Vídeo em cada exercício</b><p>O vídeo toca sozinho e a voz em português avisa o próximo exercício, a metade e a contagem 3, 2, 1.</p></div>
-    <div class="f"><i>📚</i><b>149 exercícios</b><p>Abdômen, glúteos, pernas, peito, costas, braços, cardio e alongamento, com passo a passo e dicas.</p></div>
-    <div class="f"><i>📈</i><b>Progressão automática</b><p>Marque suas repetições: o app sobe a meta quando você melhora e comemora seus recordes.</p></div>
-    <div class="f"><i>⚔️</i><b>Suba de nível</b><p>Missões diárias, chefes, títulos e ranks de E até S. Cada treino vale XP.</p></div>
-    <div class="f"><i>👥</i><b>Grupos e ranking</b><p>Entre pelo QR code, dispute a semana com os amigos e receba desafios surpresa juntos.</p></div>
-    <div class="f"><i>📝</i><b>Seus treinos</b><p>Monte treinos com até 40 exercícios, compartilhe por código e descubra os treinos da comunidade.</p></div>
-  </div>
-</div></section>
-
-<section id="telas"><div class="wrap">
-  <h2>Por dentro do app</h2>
-  <p class="sub">Arraste para o lado para ver mais telas.</p>
-  <div class="shots">
-    <figure><img src="img/home.jpg" alt="Tela inicial com nível e missão diária" loading="lazy"><figcaption>Seu plano e missão do dia</figcaption></figure>
-    <figure><img src="img/player.jpg" alt="Treino guiado com cronômetro" loading="lazy"><figcaption>Treino guiado</figcaption></figure>
-    <figure><img src="img/info.jpg" alt="Exercício com passo a passo" loading="lazy"><figcaption>Passo a passo de cada exercício</figcaption></figure>
-    <figure><img src="img/fin.jpg" alt="Subiu de nível" loading="lazy"><figcaption>Level up a cada treino</figcaption></figure>
-    <figure><img src="img/prog.jpg" alt="Progresso e recordes" loading="lazy"><figcaption>Recordes e progresso</figcaption></figure>
-    <figure><img src="img/week.jpg" alt="Resumo da semana" loading="lazy"><figcaption>Resumo para compartilhar</figcaption></figure>
-  </div>
-</div></section>
-
-<section id="instalar"><div class="wrap">
-  <h2>Como instalar</h2>
-  <p class="sub">Leva menos de 1 minuto, no Android ou no iPhone.</p>
-  <h3 class="os">🤖 Android</h3>
-  <div class="steps">
-    <div><b>Baixe o arquivo</b><span>Toque em “Baixar para Android” e abra o Shaper.apk quando o download terminar.</span></div>
-    <div><b>Permita a instalação</b><span>Se o celular pedir, toque em Configurações e ative “Permitir desta fonte” para o navegador.</span></div>
-    <div><b>Instale e treine</b><span>Toque em Instalar, abra o Shaper e responda o formulário rápido para montar seu plano.</span></div>
-  </div>
-  <h3 class="os" id="iphone"> iPhone e iPad</h3>
-  <div class="steps">
-    <div><b>Abra no Safari</b><span>Toque em <a href="app/">Abrir o Shaper</a> usando o Safari (no Chrome ou Instagram, copie o link e cole no Safari).</span></div>
-    <div><b>Compartilhar</b><span>Toque no botão Compartilhar (quadrado com seta para cima) na barra do Safari.</span></div>
-    <div><b>Adicionar à Tela de Início</b><span>Escolha “Adicionar à Tela de Início” e toque em Adicionar. O Shaper aparece com ícone e abre em tela cheia.</span></div>
-  </div>
-  <p class="cta" style="margin-top:18px"><a class="btn main" href="app/">Abrir o Shaper no iPhone</a></p>
-  <p class="small">No iPhone o app funciona pelo navegador: vídeos com play automático, voz, treinos, ranking, grupos e feed. O alarme com a tela desligada, a bolha, os widgets e o contador de passos são só do Android.</p>
-</div></section>
-
-<section><div class="wrap">
-  <h2>Perguntas frequentes</h2>
-  <details><summary>É grátis?</summary><p>Sim. O Shaper é gratuito e não tem anúncios.</p></details>
-  <details><summary>Preciso de academia ou equipamento?</summary><p>Não. O plano de 90 dias usa só o peso do corpo. Se você tiver halter, elástico ou barra, há exercícios para eles também.</p></details>
-  <details><summary>Tem para iPhone?</summary><p>Sim. Abra <a href="app/">shaperapp.github.io/app</a> no Safari e toque em Compartilhar → Adicionar à Tela de Início. Não precisa da App Store. Para entrar na conta no iPhone, use e-mail e senha.</p></details>
-  <details><summary>Funciona sem internet?</summary><p>Sim. O treino funciona offline e mostra um boneco animado no lugar do vídeo. Ranking, grupos e feed precisam de internet.</p></details>
-  <details><summary>Meus dados ficam seguros?</summary><p>Treinos, peso e fotos de progresso ficam no seu celular. Veja a <a href="privacidade.html">política de privacidade</a>.</p></details>
-  <details><summary>O celular avisou que o app é desconhecido. É seguro?</summary><p>Esse aviso aparece em todo app instalado fora da Google Play. O Shaper é assinado digitalmente e não pede acesso a contatos, localização ou dados bancários.</p></details>
-
-  <div class="final">
-    <h2>Bora começar hoje?</h2>
-    <p class="sub" style="margin:0 auto 22px">90 dias, um treino por dia. Chame um amigo e dispute o ranking.</p>
-    <div class="cta" style="justify-content:center"><a class="btn main" href="Shaper.apk" download>⬇ Android</a><a class="btn ghost" href="#iphone"> iPhone</a></div>
-  </div>
-
-  <footer>
-    <span>© 2026 Shaper</span>
-    <span><a href="privacidade.html">Privacidade</a> · <a href="excluir-conta.html">Excluir conta</a> · <a href="mailto:wesleylinoficial@gmail.com">Contato</a></span>
-  </footer>
-</div></section>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="p" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="m16 10 5-3v10l-5-3"/></symbol>
+<symbol id="v" viewBox="0 0 24 24"><path d="M4 10v4h3l6 4V6L7 10zM16 9a4 4 0 0 1 0 6"/></symbol>
+<symbol id="c" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 15l4-4 3 3 5-6"/></symbol>
+<symbol id="t" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM12 13v4M8 20h8"/></symbol>
+<symbol id="u" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7"/></symbol>
+<symbol id="f" viewBox="0 0 24 24"><path d="M7 3v8a2 2 0 0 0 2 2v8M5 3v6M9 3v6M17 21V3c-2 1-3 4-3 8h3"/></symbol>
+<symbol id="fi" viewBox="0 0 24 24"><path d="M12 21c4 0 6.5-2.6 6.5-6.3 0-3.7-3-5.7-4-9.7-2 1.8-2.6 3.7-2.6 5.2C10.6 9 9.5 8 9.3 6.6 7 8.6 5.5 11.3 5.5 14.7 5.5 18.4 8 21 12 21z"/></symbol>
+<symbol id="b" viewBox="0 0 24 24"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></symbol>
+<symbol id="s" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+<symbol id="g" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/></symbol>
+<symbol id="h" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
+<symbol id="a" viewBox="0 0 24 24"><rect x="7" y="4" width="10" height="16" rx="4"/><path d="M12 4v16M7 9.5h10M7 14.5h10"/></symbol>
+<symbol id="an" viewBox="0 0 24 24"><path d="M6 10h12v7a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2zM6 9a6 6 0 0 1 12 0M3.5 11v5M20.5 11v5"/></symbol>
+<symbol id="ap" viewBox="0 0 24 24"><path d="M12 7c-3-2-7 0-7 5 0 4 3 8 5 8 1 0 1.5-.5 2-.5s1 .5 2 .5c2 0 5-4 5-8 0-5-4-7-7-5zM12 7c0-2 1-3.5 3-4"/></symbol>
+<symbol id="sh" viewBox="0 0 24 24"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 11v9h14v-9"/></symbol>
+</svg>
+<header><div class="wrap"><a class="brand" href="#"><span class="logo">S</span>Shaper</a><nav class="top"><a href="#objetivos">Objetivos</a><a href="#recursos">Recursos</a><a href="#telas">Telas</a><a href="#perguntas">Dúvidas</a><a class="btn main sm" href="#baixar">Baixar grátis</a></nav></div></header>
+<div class="hero"><div class="wrap"><div>
+<span class="tag"><i></i>Grátis · Android e iPhone · sem anúncios</span>
+<h1>Treine em casa e <span>evolua todo dia</span></h1>
+<p class="lead">Treinos guiados com vídeo e voz para o seu objetivo: emagrecer, ganhar massa, definir, glúteos ou saúde. Com ranking e desafios entre amigos.</p>
+<div class="cta"><a class="btn main" id="dlAndroid" href="Shaper.apk" download><svg class="i"><use href="#an"/></svg>Baixar para Android</a><a class="btn ghost" id="dlIos" href="#baixar"><svg class="i"><use href="#ap"/></svg>Instalar no iPhone</a></div>
+<p class="small">Android 8 ou mais novo · versão 2.18 · 5,9 MB · iPhone pelo Safari, sem App Store</p></div>
+<div class="phones" aria-hidden="true"><div class="ph a"><img src="img/n-player.jpg" alt=""></div><div class="ph b"><img src="img/n-home.jpg" alt=""></div></div></div></div>
+<div class="stats"><div class="wrap"><div><b>149</b><span>exercícios com vídeo</span></div><div><b>6</b><span>objetivos para escolher</span></div><div><b>6</b><span>programas prontos</span></div><div><b>0</b><span>anúncios</span></div></div></div>
+<section id="objetivos"><div class="wrap"><div class="eyebrow">Do seu jeito</div><h2>Escolha o seu objetivo</h2><p class="sub">O Shaper monta a sua semana de treinos e ajusta a dieta para o que você quer. Dá para trocar quando quiser, sem perder seu progresso.</p><div class="grid">
+<div class="card goal"><span class="ib"><svg class="i"><use href="#fi"/></svg></span><div><b>Emagrecer</b><p>Cardio e treino de corpo todo, com dieta para perder gordura.</p></div></div>
+<div class="card goal"><span class="ib"><svg class="i"><use href="#b"/></svg></span><div><b>Ganhar massa e força</b><p>Peito, costas, pernas e braços, com mais proteína e calorias.</p></div></div>
+<div class="card goal"><span class="ib"><svg class="i"><use href="#s"/></svg></span><div><b>Definir e tonificar</b><p>Corpo firme e definido por inteiro.</p></div></div>
+<div class="card goal"><span class="ib"><svg class="i"><use href="#g"/></svg></span><div><b>Glúteos e pernas</b><p>Bumbum firme e pernas fortes.</p></div></div>
+<div class="card goal"><span class="ib"><svg class="i"><use href="#h"/></svg></span><div><b>Saúde e disposição</b><p>Mais energia, fôlego e mobilidade no dia a dia.</p></div></div>
+<div class="card goal"><span class="ib"><svg class="i"><use href="#a"/></svg></span><div><b>Abdômen definido</b><p>Foco no abdômen e na cintura, com o plano clássico de 90 dias.</p></div></div></div></div></section>
+<section id="recursos" style="padding-top:0"><div class="wrap"><div class="eyebrow">Recursos</div><h2>Tudo para você não parar</h2><p class="sub">Sem academia e sem equipamento. Se você tiver halter, elástico ou barra, também tem treino para eles.</p><div class="grid">
+<div class="card"><span class="ib"><svg class="i"><use href="#p"/></svg></span><b>Vídeo em cada exercício</b><p>O vídeo toca sozinho e mostra como fazer certo.</p></div>
+<div class="card"><span class="ib"><svg class="i"><use href="#v"/></svg></span><b>Treinadora por voz</b><p>Avisa o próximo exercício, a metade e conta 3, 2, 1, até com a tela desligada.</p></div>
+<div class="card"><span class="ib"><svg class="i"><use href="#c"/></svg></span><b>Progressão automática</b><p>Repetições e carga registradas, metas que sobem sozinhas e recordes.</p></div>
+<div class="card"><span class="ib"><svg class="i"><use href="#t"/></svg></span><b>Níveis e missões</b><p>Missões diárias, chefes, títulos e ranks de E até S.</p></div>
+<div class="card"><span class="ib"><svg class="i"><use href="#u"/></svg></span><b>Grupos e ranking</b><p>Entre pelo QR code, dispute a semana com os amigos e receba desafios surpresa.</p></div>
+<div class="card"><span class="ib"><svg class="i"><use href="#f"/></svg></span><b>Dieta e hábitos</b><p>Calorias e proteína do seu objetivo, refeições, água e passos do dia.</p></div></div></div></section>
+<section class="dark" id="telas"><div class="wrap"><div class="eyebrow">Por dentro</div><h2>Veja o app</h2><p class="sub">Arraste para o lado para ver mais telas.</p><div class="shots">
+<figure><img src="img/n-home.jpg" alt="Tela inicial" loading="lazy"><figcaption>Treino do dia e missões</figcaption></figure>
+<figure><img src="img/n-player.jpg" alt="Treino guiado" loading="lazy"><figcaption>Treino guiado</figcaption></figure>
+<figure><img src="img/n-treino.jpg" alt="Programas" loading="lazy"><figcaption>Programas e semana</figcaption></figure>
+<figure><img src="img/n-prog.jpg" alt="Progresso" loading="lazy"><figcaption>Progresso e recordes</figcaption></figure>
+<figure><img src="img/n-dieta.jpg" alt="Dieta" loading="lazy"><figcaption>Dieta do seu objetivo</figcaption></figure>
+<figure><img src="img/n-mais.jpg" alt="Atalhos" loading="lazy"><figcaption>Atalhos e convite</figcaption></figure></div></div></section>
+<section id="baixar"><div class="wrap"><div class="eyebrow">Baixar</div><h2>Instale grátis</h2><p class="sub">Enquanto o app não chega às lojas, instale direto daqui. Leva menos de 1 minuto.</p><div class="dl">
+<div class="card" id="android"><h3><svg class="i"><use href="#an"/></svg>Android</h3><ol><li>Toque em Baixar e abra o Shaper.apk.</li><li>Se pedir, permita instalar desta fonte.</li><li>Toque em Instalar e abra o Shaper.</li></ol><a class="btn main" href="Shaper.apk" download>Baixar para Android</a></div>
+<div class="card" id="iphone"><h3><svg class="i"><use href="#ap"/></svg>iPhone e iPad</h3><ol><li>Abra o Shaper no Safari.</li><li>Toque em Compartilhar (quadrado com seta).</li><li>Escolha "Adicionar à Tela de Início".</li></ol><a class="btn out" href="app/">Abrir o Shaper no iPhone</a></div></div>
+<div class="qr"><div class="box" id="qr"></div><p><b style="color:var(--fg)">Está no computador?</b><br>Aponte a câmera do celular para o código.</p></div></div></section>
+<section id="perguntas" style="padding-top:0"><div class="wrap"><div class="eyebrow">Dúvidas</div><h2>Perguntas frequentes</h2>
+<details><summary>É grátis mesmo?</summary><p>Sim. O Shaper é gratuito e não tem anúncios.</p></details>
+<details><summary>Preciso de academia ou equipamento?</summary><p>Não. Os planos usam o peso do corpo; se você tiver halter, elástico ou barra, há exercícios para eles também.</p></details>
+<details><summary>Serve para ganhar massa, e não só emagrecer?</summary><p>Sim. Você escolhe o objetivo e o app monta treinos e dieta para ele.</p></details>
+<details><summary>Tem para iPhone?</summary><p>Sim. Abra <a href="app/">shaperapp.github.io/app</a> no Safari e toque em Compartilhar → Adicionar à Tela de Início. Para entrar na conta, use e-mail e senha.</p></details>
+<details><summary>O celular avisou que o app é desconhecido. É seguro?</summary><p>Esse aviso aparece em todo app instalado fora da Google Play. O Shaper é assinado digitalmente e não pede contatos, localização nem dados bancários.</p></details>
+<details><summary>Meus dados ficam seguros?</summary><p>Veja a <a href="privacidade.html">política de privacidade</a>.</p></details>
+<div class="final"><h2>Bora começar hoje?</h2><p>Escolha seu objetivo, treine com vídeo e voz e chame um amigo para disputar o ranking.</p><div class="cta"><a class="btn light" href="Shaper.apk" download>Android</a><a class="btn ghost" href="#iphone">iPhone</a></div></div></div></section>
+<footer><div class="wrap"><span>© 2026 Shaper</span><span><a href="privacidade.html">Privacidade</a><a href="excluir-conta.html">Excluir conta</a><a href="mailto:wesleylinoficial@gmail.com">Contato</a></span></div></footer>
+<button class="share" id="share"><svg class="i"><use href="#sh"/></svg>Compartilhar</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script>
-  // no iPhone o botão principal vira "Instalar no iPhone"
-  var ios = /iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  if (ios) { var a = document.getElementById("dlAndroid"), i = document.getElementById("dlIos"); a.className = "btn ghost"; i.className = "btn main"; i.parentNode.insertBefore(i, a); }
+var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/i.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+if(ios){var a=document.getElementById("dlAndroid"),b=document.getElementById("dlIos");a.className="btn ghost";b.className="btn main";b.parentNode.insertBefore(b,a);}
+try{var q=qrcode(0,"M");q.addData("https://shaperapp.github.io/");q.make();document.getElementById("qr").innerHTML=q.createSvgTag({cellSize:4,margin:0});}catch(e){}
+var TXT="Conheci o Shaper: treinos em casa com vídeo e voz, para o seu objetivo, e ranking com os amigos. Grátis: https://shaperapp.github.io/";
+function toast(m){var t=document.createElement("div");t.className="toast";t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove()},2200)}
+document.getElementById("share").onclick=function(){if(navigator.share){navigator.share({title:"Shaper",text:TXT}).catch(function(){});return}location.href="https://wa.me/?text="+encodeURIComponent(TXT)};
 </script>
 </body>
 </html>
