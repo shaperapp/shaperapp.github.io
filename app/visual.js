@@ -59,4 +59,9 @@
     return '<div class="stack hv">' + top + (pw ? pw.outerHTML : "") + hero() + (sys ? sys.outerHTML : "") + (steps ? steps.outerHTML : "") + week() + plan + (dica ? dica.outerHTML : "") + '</div>';
   };
   document.addEventListener("toggle", e => { if (e.target.classList && e.target.classList.contains("hv-plan")) planOpen = e.target.open; }, true);
+  // aba Treino: mesmo título curto do esboço
+  const _vt = vTreino;
+  vTreino = function () { return _vt().replace("<h1>Plano semanal</h1>", "<h1>Treino</h1>"); };
+  // este módulo carrega por último: redesenha a tela já aberta para ela sair no visual novo
+  try { if (!document.querySelector("#layer > *")) render(); } catch (e) {}
 })();
