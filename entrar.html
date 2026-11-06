@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Entrar no grupo · Shaper</title>
+<meta name="robots" content="noindex">
+<style>
+  :root{--bg:#070D1C;--fg:#fff;--muted:#AFC0EC}
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(90% 60% at 15% 0%,rgba(77,124,255,.45),transparent 60%),radial-gradient(80% 55% at 100% 30%,rgba(138,92,255,.35),transparent 60%),var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  main{width:100%;max-width:420px;padding:24px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+  .logo{width:72px;height:72px;border-radius:22px;background:linear-gradient(135deg,#4D7CFF,#8A5CFF);display:grid;place-items:center;font-weight:800;font-size:2.4rem;box-shadow:0 12px 40px rgba(110,100,255,.55)}
+  h1{margin:6px 0 0;font-size:1.8rem}p{margin:0;color:var(--muted)}
+  .code{display:flex;gap:6px;justify-content:center;margin:6px 0}
+  .code span{width:42px;height:52px;border-radius:12px;display:grid;place-items:center;font-size:1.5rem;font-weight:800;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18)}
+  a.btn{display:block;width:100%;box-sizing:border-box;padding:16px;border-radius:16px;font-weight:800;text-decoration:none;color:#fff;background:linear-gradient(135deg,#3D6CF0,#7B5CFF);box-shadow:0 10px 26px rgba(90,100,255,.4)}
+  small{color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+  <div class="logo">S</div>
+  <h1>Convite para o grupo</h1>
+  <p>Você foi chamado para competir no ranking do Shaper.</p>
+  <div class="code" id="code"></div>
+  <a class="btn" id="open" href="#">Abrir no Shaper</a>
+  <small>No iPhone, o link abre a versão web do Shaper. Não abriu? Abra o app, vá em Ranking → “Tenho um código” e digite o código acima.</small>
+</main>
+<script>
+  // só aceita código de 6 letras/números; abre o app pelo link com.shaper.app://join
+  var c = (new URLSearchParams(location.search).get("c") || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
+  var box = document.getElementById("code");
+  c.split("").forEach(function (ch) { var s = document.createElement("span"); s.textContent = ch; box.appendChild(s); });
+  var app = "com.shaper.app://join?c=" + c;
+  var intent = "intent://join?c=" + c + "#Intent;scheme=com.shaper.app;package=com.shaper.app;end";
+  var btn = document.getElementById("open");
+  // Android abre o app instalado; iPhone e computador abrem a versão web do Shaper
+  btn.href = /Android/i.test(navigator.userAgent) ? intent : "app/?c=" + c;
+  if (c.length === 6) setTimeout(function () { location.href = btn.href; }, 400);
+</script>
+</body>
+</html>
