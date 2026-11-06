@@ -126,10 +126,14 @@
 
   function push() {
     if (!NATIVE) return;
-    const y = Y(), xp = xpTotal(), L = levelOf(xp), it = items();
+    const y = Y(), xp = xpTotal(), L = levelOf(xp), it = items(), a = need(L), b = need(L + 1), T = targets(), boss = bossNow();
+    const names = [MNAME[0], MNAME[1].replace("{w}", fmtL(waterT())), MNAME[2].replace("{p}", T.prot)];
     nat("systemStatus", JSON.stringify({
       on: !!y.on, date: todayStr(), level: L, rank: rankOf(L), xp, title: curTitle(),
-      done: it.filter(i => i.ok).length, total: it.length, items: it.map(i => ({ t: i.t, ok: i.ok, p: i.p })),
+      done: it.filter(i => i.ok).length, total: it.length,
+      items: it.map((i, k) => ({ t: i.t, ok: i.ok, p: k === 0 ? (i.ok ? "concluída" : "pendente") : i.p, n: names[k], f: Math.max(0, Math.min(1, i.f)), xp: MXP[k] })),
+      pct: Math.max(0, Math.min(1, (xp - a) / (b - a))), left: b - xp, next: L + 1,
+      streak: typeof streak === "function" ? streak() : 0, boss: boss ? boss.n : "",
       pen: penActive() ? PENALTY : ""
     }));
   }
@@ -137,11 +141,20 @@
 
   /* ---------- pop-ups ---------- */
   const Q = [];
-  let showing = false;
-  function pop(o) { Q.push(o); flush(); }
+  let showing = false, BI = 0, BT = 0; // posição na fila atual ("1 de 3")
+  function pop(o) { Q.push(o); if (showing) { BT++; counter(document.querySelector(".sys-popwrap")); } flush(); }
+  function counter(w) {
+    const ok = w && w.querySelector("[data-popok]");
+    if (!ok) return;
+    w.querySelectorAll(".s2-dots,.s2-cnt").forEach(x => x.remove());
+    if (BT > 1) ok.insertAdjacentHTML("beforebegin", '<div class="s2-dots">' + Array.from({ length: BT }, (_, j) => '<i' + (j === BI - 1 ? ' class="on"' : "") + '></i>').join("") + '</div><small class="s2-cnt">' + BI + ' de ' + BT + ' novidades</small>');
+    ok.textContent = BI < BT ? "Próxima" : "OK";
+  }
   function flush() {
     if (showing || !Q.length || document.hidden || (PL && !PL.fin)) return;
     showing = true;
+    if (BI >= BT) { BI = 0; BT = Q.length; }
+    BI++;
     const o = Q.shift();
     if (o.lv) return levelUp(o.lv[0], o.lv[1]);
     panel('<div class="sys-pop ' + (o.c || "") + '"><div class="hd">[ ' + o.hd + ' ]</div><h2 class="sys-type" data-t="' + esc(o.h) + '"></h2>' +
@@ -153,6 +166,7 @@
     const w = document.createElement("div");
     w.className = "scrim sys-popwrap";
     w.innerHTML = html;
+    counter(w);
     document.body.appendChild(w);
     type(w);
     const close = () => { if (!w.isConnected) return; w.remove(); if (onClose) onClose(); showing = false; setTimeout(flush, 250); };
@@ -187,24 +201,39 @@
 
   /* ---------- cartão na tela inicial ---------- */
   function qi(i) { return '<div class="sys-qi' + (i.ok ? " ok" : "") + '"><span class="ck">✓</span><span class="t">' + i.t + '</span><span class="p">' + i.p + '</span></div>'; }
+  // ícones de linha (sem emoji) e XP de cada missão: treino 100, água 25, proteína 25
+  const SV = p => '<svg viewBox="0 0 24 24" class="s2i" aria-hidden="true">' + p + '</svg>';
+  const SIC = {
+    treino: SV('<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/>'), agua: SV('<path d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11z"/>'),
+    prot: SV('<path d="M15.5 4.5a4 4 0 0 1 3 6.6l-6.4 6.4a3 3 0 1 1-4.2-4.2l1-1a4 4 0 0 1 6.6-7.8zM7 17l-2.5 2.5"/>'), ok: SV('<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>'),
+    bolt: SV('<path d="M13 3 5 14h6l-1 7 8-11h-6z"/>'), fire: SV('<path d="M12 21c4 0 6.5-2.6 6.5-6.3 0-3.7-3-5.7-4-9.7-2 1.8-2.6 3.7-2.6 5.2C10.6 9 9.5 8 9.3 6.6 7 8.6 5.5 11.3 5.5 14.7 5.5 18.4 8 21 12 21z"/>'),
+    clock: SV('<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/>'), warn: SV('<path d="M12 4 2.5 20h19zM12 10v4M12 17v.5"/>'), sword: SV('<path d="M14.5 4H20v5.5L9 20.5 3.5 15zM6 13l5 5M4 20l2-2"/>')
+  };
+  const MXP = [100, 25, 25], MNAME = ["Fazer o treino do dia", "Beber " + "{w}" + " de água", "Comer {p} g de proteína"];
+  function missionRows(it) {
+    const T = targets();
+    return it.map((i, k) => {
+      const f = Math.max(0, Math.min(1, i.f)), name = MNAME[k].replace("{w}", fmtL(waterT())).replace("{p}", T.prot);
+      return '<div class="s2-mi' + (i.ok ? " done" : "") + '"><span class="s2-ic">' + (i.ok ? SIC.ok : [SIC.treino, SIC.agua, SIC.prot][k]) + '</span><div class="s2-mt"><div class="s2-row"><b>' + name + '</b><span class="s2-xp">+' + MXP[k] + ' XP</span></div>' +
+        '<i class="s2-bar"><i style="width:' + (f * 100).toFixed(1) + '%"></i></i><small>' + (k === 0 ? (i.ok ? "concluída" : "pendente") : i.p) + '</small></div></div>';
+    }).join("");
+  }
   function cardHTML() {
     const y = Y();
     if (!y.on) return "";
     const xp = xpTotal(), L = levelOf(xp), a = need(L), b = need(L + 1), R = rankOf(L), it = items(), n = it.filter(i => i.ok).length, boss = bossNow(), m = mission();
-    const pct = Math.max(0, Math.min(1, (xp - a) / (b - a))), C = 2 * Math.PI * 34, st = typeof streak === "function" ? streak() : 0;
-    const alert = (cls, ic, lbl, txt, go) => '<div class="sc-alert ' + cls + '"><span class="sc-aic">' + ic + '</span><div class="sc-at"><span class="sys-lbl">' + lbl + '</span><b>' + txt + '</b></div>' + (go ? '<span class="sc-go">' + go + ' ›</span>' : "") + '</div>';
-    return '<div class="sys-card sc2" data-sysopen role="button" tabindex="0">' +
-      '<div class="sc-top"><div class="sc-badge" data-rank="' + R + '"><svg viewBox="0 0 80 80" aria-hidden="true"><circle class="tr" cx="40" cy="40" r="34"/><circle class="pg" cx="40" cy="40" r="34" style="stroke-dasharray:' + C.toFixed(1) + ';stroke-dashoffset:' + (C * (1 - pct)).toFixed(1) + '"/></svg><span>' + R + '</span></div>' +
-      '<div class="sc-who"><span class="sys-lbl">Sistema · ' + esc(curTitle() || "Jogador") + '</span><div class="sc-lv">Nível ' + L + '</div><span class="sc-sub">Faltam <b>' + (b - xp) + ' XP</b> para o nível ' + (L + 1) + '</span></div>' +
-      '<div class="sc-chips"><span class="sc-chip fire" title="Dias seguidos">🔥 ' + st + '</span><span class="sc-chip">' + (xp - a) + '<small>/' + (b - a) + '</small></span></div></div>' +
-      '<div class="sc-xp"><i style="width:' + (pct * 100).toFixed(1) + '%"></i></div>' +
-      '<div class="sc-mh"><span class="sys-lbl">Missão diária · ' + n + '/3</span><span class="sc-time' + (n === 3 ? " ok" : "") + '">' + (n === 3 ? "✓ Concluída · +150 XP" : "⏱ " + leftToday()) + '</span></div>' +
-      '<div class="sc-q">' + it.map(i => '<div class="sc-qi' + (i.ok ? " ok" : "") + '" style="--f:' + Math.max(0, Math.min(1, i.f)).toFixed(3) + '"><span class="sc-ic">' + (i.ok ? "✓" : i.ic) + '</span><b>' + i.t.replace(" do dia", "") + '</b><small>' + i.s + '</small><i class="sc-bar"></i></div>').join("") + '</div>' +
-      (penActive() ? alert("red", "⚠", "Zona de penalidade", PENALTY, "") : "") +
-      (boss ? alert("boss", "⚔", "Chefe disponível", esc(boss.n), "Enfrentar") : "") +
-      (m ? alert("red", "⚡", "Missão surpresa", m.st === "active" ? "Em andamento" : "Esperando sua resposta", "Ver") : "") + '</div>';
+    const pct = Math.max(0, Math.min(1, (xp - a) / (b - a))), C = 2 * Math.PI * 26, st = typeof streak === "function" ? streak() : 0;
+    const row = (cls, ic, lbl, txt, go) => '<div class="s2-alert ' + cls + '"><span class="s2-ic">' + ic + '</span><div class="s2-mt"><span class="s2-lbl">' + lbl + '</span><b>' + txt + '</b></div>' + (go ? '<span class="s2-go">' + go + ' ›</span>' : "") + '</div>';
+    return '<div class="sys-card s2" data-sysopen role="button" tabindex="0">' +
+      '<div class="s2-top"><div class="s2-ring" data-rank="' + R + '"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" class="tr"/><circle cx="32" cy="32" r="26" class="pg" style="stroke-dasharray:' + C.toFixed(1) + ';stroke-dashoffset:' + (C * (1 - pct)).toFixed(1) + '"/></svg><span>' + R + '</span></div>' +
+      '<div class="s2-who"><span class="s2-lbl">Sistema · Rank ' + R + (curTitle() ? " · " + esc(curTitle()) : "") + '</span><b class="s2-lv">Nível ' + L + '</b><small>Faltam ' + (b - xp) + ' XP para o nível ' + (L + 1) + '</small></div>' +
+      '<span class="s2-chip" title="Dias seguidos">' + SIC.fire + st + '</span></div>' +
+      '<div class="s2-head"><span class="s2-lbl">Missões de hoje · ' + n + ' de 3</span><span class="s2-chip' + (n === 3 ? " ok" : "") + '">' + (n === 3 ? SIC.ok + "+150 XP" : SIC.clock + leftToday()) + '</span></div>' +
+      missionRows(it) +
+      (penActive() ? row("red", SIC.warn, "Zona de penalidade", PENALTY, "") : "") +
+      (boss ? row("boss", SIC.sword, "Chefe disponível", esc(boss.n), "Enfrentar") : "") +
+      (m ? row("red", SIC.bolt, "Missão surpresa", m.st === "active" ? "Em andamento" : "Esperando sua resposta", "Ver") : "") + '</div>';
   }
-
   /* ---------- tela de status ---------- */
   function screenHTML() {
     const y = Y(), xp = xpTotal(), L = levelOf(xp), a = need(L), b = need(L + 1), R = rankOf(L), it = items(), n = it.filter(i => i.ok).length, boss = bossNow(), m = mission(), ct = curTitle();
